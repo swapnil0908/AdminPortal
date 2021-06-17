@@ -1,0 +1,27 @@
+/* Create three equal columns that floats next to each other */
+.column-1,.column-2,.column-3 {
+    float: left;
+    width: 33.33%;
+    padding: 20px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .field{
+
+  }
+
+  .drop-zone{
+
+  }
+  i{
+      float: right;
+  }
+  /* 3 dots handle for dragging and dropping
+  <i class="fa fa-ellipsis-v dndHandle" dndHandle></i> */

@@ -1,0 +1,68 @@
+<!--one row divided into three components-->
+<div class="row">
+  <!--column 1 - Draggable List-->
+  <div class="column-1" style="background-color:rgb(255, 255, 255);">
+    <h6 (click)="test()"><b>Add form Section/field</b></h6>
+      <div class="fields" *ngFor="let item of fieldModels">
+        <div class="field pointer shadow-bg" [dndDraggable]="item"
+        [dndEffectAllowed]="'copy'" 
+        (dndEnd)="onDragEnd($event)">
+          <i [ngClass]="item.icon" class="fa pull-left"></i>
+          <div class="vertical-list"><h6>{{item.label}}</h6></div>
+        </div>
+      </div>
+  </div>
+
+  <!--column 2 - Droppable Area-->
+  <div class="column-2" style="background-color:rgb(255, 255, 255);">
+    <!--top half-->
+    <h6>Form name</h6>
+      <input class="form-control" type="text" [(ngModel)]="model.name" /><br>
+      <h6>Form description</h6>
+      <input class="form-control" type="text" [(ngModel)]="model.description" /><br>
+      <h6>Date created</h6>
+      <input class="form-control" type="text" [(ngModel)]="model.date" /><br>
+
+    <!--Bottom Half - Drappable zone-->
+      <section dndDropzone
+      (dndDragover)="onDragover($event)"
+      (dndDrop)="onDrop($event,model.attributes)" class="dndDropArea"
+      [ngClass]="{'empty':model.attributes.length == 0}"
+      [style.backgroundColor]="model.theme.bgColor"
+      [style.color]="model.theme.textColor">
+
+
+      <div class="field" *ngFor="let item of model.attributes;let i= index;" 
+      [ngClass]="item.toggle ? 'form-group-2' : 'form-group-1'"
+        (dndStart)="onDragStart($event)"
+        (dndCanceled)="onDragCanceled($event)"
+        (dndMoved)="onDragged(item, model.attributes, 'move')"
+        [dndEffectAllowed]="'all'" 
+        [dndDraggable]="item">
+        
+          <!--DROPZONE-->
+          <div class="drop-zone"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                <div *ngIf="item.type=='text'">
+                      <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+                      <input type="text" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" >
+                </div>
+                <div *ngIf="item.type=='email'">
+                      <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+                      <input type="email" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" >
+                </div>
+          </div>
+        
+            <!--optional placeholder element for dropzone-->
+            <!--will be removed from DOM on init-->
+          <div class="dndPlaceholder" dndPlaceholderRef>
+          </div>
+        
+      </section>
+  </div>
+
+  <!--column 3 - Preview Form-->
+  <div class="column-3" style="background-color:#ccc;">
+    <h2>Column 3</h2>
+    <p>Some text..</p>
+  </div>
+</div>
