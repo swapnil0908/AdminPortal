@@ -1,10 +1,29 @@
 /* Create three equal columns that floats next to each other */
+.row{
+  padding: 0;
+}
 .column-1,.column-2,.column-3 {
-    float: left;
-    width: 33.33%;
     padding: 20px;
-    height: 300px; /* Should be removed. Only for demonstration */
   }
+
+/* ----------------- column 1 ---------------------------*/
+  .column-1{
+    float: left;
+    width: max-content;
+    margin-left: 30px;
+    width: 15%;
+  /*  box-shadow: 4px 4px 4px 0 rgb(194, 194, 194); */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    text-align: center;
+    margin-top: 2%;
+    
+  }
+
+  .column-1:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
   
   /* Clear floats after the columns */
   .row:after {
@@ -13,15 +32,129 @@
     clear: both;
   }
 
-  .field{
-
+  /* ----------------- column 2 ---------------------------*/
+  .column-2{
+    margin-top: 2%;
+    margin-left: 2%;
+    width: 45%;
+    background-color: #eee;
   }
 
-  .drop-zone{
-
+  /* static field css */
+  .col-2-static-name{
+    background-color: rgb(243, 243, 243);
+    border: none;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 10%;
   }
+
+  .col-2-static-description{
+    background-color: rgb(243, 243, 243);
+    border: none;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 20%;
+  }
+
+  .col-2-static-date{
+    background-color: rgb(243, 243, 243);
+    border: none;
+    margin-bottom: 10px;
+    width: 40%;
+    height: 10%;
+  }
+
+
+  /* ----------------- column 3 ---------------------------*/
+  .column-3{
+    margin-top: 2%;
+    margin-left: 2%;
+    text-align: left;
+    width: 32%;
+  }
+
+  .col-3-text{
+    display: none;
+  }
+
+  .col-3-email{
+    display: none;
+  }
+
+  .col-3-phone{
+    display: none;
+  }
+
+  .col-3-date{
+    display: none;
+  }
+
+  .col-3-select{
+    display: none;
+  }
+
+
+  .icons-col1{
+    float: left;
+  }
+
+  .vertical-list{
+    text-align: left;
+  }
+
   i{
-      float: right;
+    float: right;
+    color: black;
   }
-  /* 3 dots handle for dragging and dropping
-  <i class="fa fa-ellipsis-v dndHandle" dndHandle></i> */
+
+
+  .dropped-element-text, .dropped-element-email,.dropped-element-phone, .dropped-element-date, .dropped-element-select{
+    cursor: pointer;
+    align-items: center;
+    padding-left: 2%;
+    padding-right: 5%;
+  }
+
+  h6{
+    font-size: small;
+  }
+
+  button{
+    margin-top: 2%;
+  }
+
+  label{
+    font-size: small;
+  }
+
+
+  .form-control{
+    background-color: rgb(243, 243, 243);
+    border: none;
+    margin-bottom: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  .save-button, .add-button{
+    background-color: rgb(70, 129, 110);
+    border: none;
+    color: white;
+    font-weight: normal;
+  }
+
+  .dropdown{
+    width: max-content;
+  }
+
+  .overlay {
+    z-index: 1;
+    margin: 50px;
+    background: #009938;
+  }
+
+  .stack-top{
+     /* for demo purpose  */
+}
+

@@ -1,0 +1,147 @@
+
+.column-2 {
+    width: 80%;  /*change this */
+    height: 80%;
+    /*border-style: solid;
+    border-color: black;*/
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 0;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    overflow-y: scroll;
+    transition: 0.5s;
+  }
+
+
+.sidenav {
+    margin-top: 2%;
+    height: max-content;
+    width: max-content;
+    margin-left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.5s;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
+    left: 2%;
+    float: left;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    text-decoration: none;
+    text-align: left;
+    font-size:small;
+    background-color: rgb(230, 230, 230);
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+  .sidenav a:hover {
+    color: #eeba5a;
+  }
+
+  .col-2-static-name{
+    background-color: rgb(243, 243, 243);
+    border: none;
+    float: left;
+    margin-top: none;
+    margin-left: 0.5%;
+    width: max-content;
+    height: max-content;
+  }
+
+  label{
+      margin-left: 1%;
+  }
+
+  .save-button {
+    background-color: rgb(70, 129, 110);
+    border: none;
+    color: white;
+    font-weight: normal;
+  }
+
+
+  /* Dropdown menu */
+  
+  /*
+  .dropbtn {
+    background-color: rgb(243, 243, 243);
+    color: black;
+    width: 100%;
+    padding: 11px;
+    margin-left: 6%;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: max-content;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block;}
+  */
+
+  #dropdownMenuButton{
+    color: chocolate;
+  }
+
+  .row1, .row2,.row3, .row4, .row5, .row6{
+      display: flex;
+  }
+
+  .left{
+      width: 50%;
+      margin-left: 2%;
+      margin-right: 5%;
+      
+  }
+
+  .right{
+      width: 50%;
+      
+  }
+
+  b{
+    margin-left: 2%;
+  }
+
+  label{
+      font-size: small;
+      font-weight: bold;
+      
+  }
+
+  #formGroupExampleInput{
+    width: 70%;
+    background-color: rgb(230, 230, 230);
+  }
+

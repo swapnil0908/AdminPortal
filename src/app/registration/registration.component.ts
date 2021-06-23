@@ -3,12 +3,25 @@ import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { field, value } from '../global.model';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import * as menudata from './menu-data.json';
+import * as labelsData from './text-labels.json';
+import * as emaillabelsData from './emailLabels.json';
+import * as namesData from './names.json';
+import * as emailValues from './emailValue.json';
+import * as phoneLabelData from './phoneLabels.json';
+import * as phoneValueData from './phoneValue.json';
+import * as selectLabelData from './selectLabel.json';
+import * as selectValueData from './selectValue.json';
+
 
 @Component({
   selector: 'app-edit-app',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
+
+
 export class RegistrationComponent implements OnInit {
 
   value:value={
@@ -21,42 +34,49 @@ export class RegistrationComponent implements OnInit {
 
 //Array of objects 
 
-public data: Array<any> = [
-  
-];
 
+public data: any = (menudata as any).default;
+
+//text
+public labels: any = (labelsData as any).default;
+public names: any = (namesData as any).default;
+
+//email
+public emailValue: any = (emailValues as any).default;
+public emaillabels: any = (emaillabelsData as any).default;
+
+//phone
+public phoneValue: any = (phoneValueData as any).default;
+public phoneLabel: any = (phoneLabelData as any).default;
+
+//select
+public selectValue: any = (selectValueData as any).default;
+public selectLabel: any = (selectLabelData as any).default;
+
+
+
+labelModels:Array<field>=this.labels;
+nameModels:Array<field>=this.names;
+
+emaillabelModels:Array<field>=this.emaillabels;
+emailValueModels:Array<field>=this.emailValue;
+
+phoneValueModels:Array<field>=this.phoneValue;
+phoneLabelModels:Array<field>=this.phoneLabel;
+
+selectValueModels:Array<field>=this.selectValue;
+selectLabelModels:Array<field>=this.selectLabel;
+
+
+fieldModels:Array<field>= this.data;
 /*
-sample: Array<any> = [{
-  Field: 'Key',
-  Value: '7'
-},
-{
-  Field: 'City',
-  Value: 'Some City'
-},
-{
-  Field: 'Description',
-  Value: 'Some Description'
-}
-];
-
-// #1 Mapping the array to an object...
-var obj = {};
-array.forEach(item => obj[item.Field] = item.Value);
-
-// #2 Converting the object to JSON...
-let json = JSON.stringify(obj);
-
-console.log(json);*/
-
-
   fieldModels:Array<field>=[
     {
-      "type": "text",
+      "type": "text", 
       "icon": "fa-font",
-      "label": "Text",
-      "description": "Enter your name",
-      "placeholder": "Enter your name",
+      "label": "Text", // dropdown
+      "description": "Enter your text",
+      "placeholder": "Enter your texxt",
       "className": "form-control",
       "subtype": "text",
       "regex" : "",
@@ -98,7 +118,7 @@ console.log(json);*/
       "value": "20",
       "min": 12,
       "max": 90
-    },*/
+    },
     {
       "type": "date",
       "icon":"fa-calendar",
@@ -125,7 +145,7 @@ console.log(json);*/
       "icon": "fa-paragraph",
       "label": "Paragraph",
       "placeholder": "Enter your paragraph here" 
-    },*/
+    },
 
     {
       "type": "checkbox",
@@ -183,7 +203,7 @@ console.log(json);*/
           "value": "option-3"
         }
       ]
-    },*/
+    },
     {
       "type": "file",
       "icon":"fa-file",
@@ -197,12 +217,12 @@ console.log(json);*/
       "subtype": "submit",
       "label": "Submit"
     }
-  ];
+  ]; */
 
   modelFields:Array<field>=[];
   model:any = {
-    name:'form name',
-    description:'form description',
+    name:'Form-name',
+    description:'Form-description',
     date: 'mm/dd/yyyy',
     theme:{
       bgColor:"ffffff",
@@ -228,11 +248,12 @@ console.log(json);*/
     //   });
     // });
 
-
     // this.model = this.cs.data; 
     // console.log(this.model.data);
-
   }
+
+
+
 
   onDragStart(event:DragEvent) {
     console.log("drag started", JSON.stringify(event, null, 2));
@@ -276,6 +297,72 @@ console.log(json);*/
       }
       list.splice( index, 0, event.data );
     }
+
+    //code to display div on drop
+    console.log(event.data);
+    
+
+    if(event.data.label === "Text"){
+          var x = document.getElementById('columnTextId-3');
+          //var background = document.getElementById("columnId-3")
+          this.hideOtherDivs(x);
+          //background.style.boxShadow = "box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)";
+          //background.style.transition= "0.3s";
+          x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+          x.style.transition = "0.3s";
+          x.style.padding = "5%";
+          x.style.display = "block";
+          
+    }
+
+    
+    else if(event.data.label === "Email"){
+          var x = document.getElementById("columnEmailId-3");
+          this.hideOtherDivs(x);
+          x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+          x.style.transition = "0.3s";
+          x.style.padding = "5%";
+          x.style.display = "block";
+
+    }
+
+
+    else if(event.data.label === "Phone"){
+      var x = document.getElementById("columnPhoneId-3");
+      this.hideOtherDivs(x);
+      x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+      x.style.transition = "0.3s";
+      x.style.padding = "5%";
+      x.style.display = "block";
+
+}
+
+
+    else if(event.data.label === "Select"){
+      console.log("here");
+      var x = document.getElementById("columnSelectId-3");
+      this.hideOtherDivs(x);
+      x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+      x.style.transition = "0.3s";
+      x.style.padding = "5%";
+      x.style.display = "block";
+
+    }
+
+    /*
+    else if(event.data.label === "Date"){
+      var x = document.getElementById("columnDateId-3");
+      this.hideOtherDivs(x);
+
+      x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+      x.style.transition = "0.3s";
+      x.style.padding = "5%";
+      x.style.display = "block";
+      x.style.display = "block";
+
+    }*/
+
+    //console.log(this.data);
   }
 
   addValue(values){
@@ -316,7 +403,6 @@ console.log(json);*/
     // });
   }
 
-
   initReport(){
     this.report = true; 
     let input = {
@@ -333,17 +419,123 @@ console.log(json);*/
     //     })
     //   });
     // });
-    this.initReport1();
+    //console.log(this.model.attributes);
+
+    console.log(this.model.name);
+    console.log(this.model.description);
+    console.log(this.model.date);
+
+    //this.testFunction();
+
+  }
+    /*
+    testFunction(){
+      console.log(this.model.attributes);
+      for(var i=0;i<this.model.attributes.length;i++)
+      if(this.model.attributes[i].label === "Text")
+        console.log("text hai");
+      else if(this.model.attributes[i].label === "Email")
+        console.log("email hai");
+    }*/
+
+
+    setLabel(x,y,required){
+      var l = document.getElementById("text-form");
+      l.textContent = x;
+      var n = document.getElementById("text-form-id")
+      n.setAttribute('value', y);
+      if(required === "yes")
+      document.getElementById("text-form").append("*");
+    }
+
+
+    setEmailLabel(x,y,required){
+      var l = document.getElementById("email-form");
+      l.textContent = x;
+      var n = document.getElementById("email-form-id")
+      n.setAttribute('value', y);
+      if(required === "yes")
+      document.getElementById("email-form").append("*");
+    }
+
+
+    setPhoneLabel(x,y,required){
+      var l = document.getElementById("phone-form");
+      l.textContent = x;
+      var n = document.getElementById("phone-form-id")
+      n.setAttribute('value', y);
+      if(required === "yes")
+      document.getElementById("phone-form").append("*");
+    }
+
+
+
+  
+  hideOtherDivs(div){
+      var Divs = ['columnTextId-3', 'columnEmailId-3','columnPhoneId-3','columnSelectId-3'];
+      for(var i=0;i<Divs.length;i++){
+        if(div != document.getElementById(Divs[i])){
+          document.getElementById(Divs[i]).style.display = "none";
+        }
+    }
+  }
+/* //code for draggable icon popup (move up / down/ delete)
+  iconPopUp(){
+    var x = document.getElementById("stack-top");
+    if(x.style.display === "none"){
+    x.style.background = "gray";
+      x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+      x.style.width = "10%";
+      x.style.position = "right";
+      x.style.transition = "0.3s";
+      x.style.padding = "5%";
+      x.style.display = "block";
+      x.style.zIndex = "9";
+      x.style.margin = "20px";
+    }
+    else{
+      x.style.display = "none";
+    }
+  }*/
+
+  displayColumn3Text() {
+    
+    var x = document.getElementById("columnTextId-3");
+    this.hideOtherDivs(x)
+    //code to make all other divs hidden
+      x.style.display = "block";
+      
   }
 
-  initReport1(){
-    console.log("about to save data");
-    this.data.push(this.model.name);
-    this.data.push(this.model.date)
-    console.log(this.data);
+  displayColumn3Email() {
+    var x = document.getElementById("columnEmailId-3");
+
+    //code to make all other divs hidden
+      this.hideOtherDivs(x);
+      x.style.display = "block";
+      
   }
 
+  displayColumn3Phone() {
+    var x = document.getElementById("columnPhoneId-3");
+    console.log(x);
+    //code to make all other divs hidden
+      this.hideOtherDivs(x);
+      x.style.display = "block";
+      
+  }
 
+  displayColumn3Select(){
+    var x = document.getElementById("columnSelectId-3");
+    this.hideOtherDivs(x)
+    //code to make all other divs hidden
+    x.style.display = "block";
+  }
+  
+  closeFunction(id){
+    var x = document.getElementById(id);
+    x.style.display = "none";
+  }
 
   toggleValue(item){
     item.selected = !item.selected;

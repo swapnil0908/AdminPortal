@@ -134,12 +134,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
 var appRoutes = [
     { path: '', component: _edit_app_edit_app_component__WEBPACK_IMPORTED_MODULE_7__["EditAppComponent"] },
 ];
@@ -220,7 +214,7 @@ var EditAppComponent = /** @class */ (function () {
             value: ""
         };
         this.success = false;
-        this.fieldModels = [
+     /*   this.fieldModels = [
             {
                 "type": "text",
                 "icon": "fa-font",
@@ -362,7 +356,7 @@ var EditAppComponent = /** @class */ (function () {
                 "subtype": "submit",
                 "label": "Submit"
             }
-        ];
+        ];*/
         this.modelFields = [];
         this.model = {
             name: 'App name...',

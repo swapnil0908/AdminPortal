@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppOnboardingComponent } from './app-onboarding/app-onboarding.component';
 import { WorkflowComponent } from './workflow/workflow.component';
 import { AppCreationComponent } from './app-creation/app-creation.component';
+import { SaveFormComponent } from './save-form/save-form.component';
 
 
 
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     AppOnboardingComponent,
     WorkflowComponent,
-    AppCreationComponent
+    AppCreationComponent,
+    SaveFormComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

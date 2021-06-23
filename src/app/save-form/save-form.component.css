@@ -1,0 +1,17 @@
+th{
+    background-color: rgb(70, 129, 110);
+    color: white;
+    font-weight: normal;
+}
+
+table{
+    margin: auto;
+    margin-top: 10%;
+}
+
+.btn-group{
+    background-color: rgb(70, 129, 110);
+    border: none;
+    color: white;
+    font-weight: normal;
+}

@@ -1,3 +1,311 @@
-<p>
-  app-onboarding works!
-</p>
+
+<div class="row">
+  <!--column 1 - Draggable List-->
+  <div class="sidenav" id="mySidenav" style="background-color:rgb(255, 255, 255);">
+    <nav class="nav nav-pills nav-justified">
+      <a class="nav-link active">New</a>
+      <a class="nav-link">Existing</a>
+    </nav>
+      <a (click)="openAppMetadata()">App Metadata</a>
+      <a href="#">Create Forms</a>
+      <a>Email Template</a>
+      <a>Workflow</a>
+      <a>Application Branding</a>
+      
+  </div>
+      
+
+  <div id="columnId-2" class="column-2">
+        <b>App Meta data</b><br><br>
+
+        <!-----------------------Row 1------------------------->
+        <div class="row1">
+          <div class="left">
+            
+            <div class="form-group">
+              <label for="formGroupExampleInput">App name</label>
+              <input type="text" class="form-control" id="formGroupExampleInput">
+            </div>
+    
+          </div>
+          <div class="right">
+            <label>Marketing Application Category</label><br>
+            <!--<div class="dropdown">
+              <button (click)="dropDownFunction(1)" class="dropbtn">---Select---</button>
+              <div id="myDropdown-1" class="dropdown-content">
+                  <a>Medical education content</a>
+                  <a>Product information content</a>
+                  <a>Category 3</a>
+              </div>
+            </div>-->
+            
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle custom-button"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >Medical education content</a>
+                <a class="dropdown-item" >Product information content</a>
+                <a class="dropdown-item" >Category 3</a>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+        </div>
+        
+        <!-----------------------Row 2------------------------->
+        <div class="row2">
+          <div class="left">
+            <label>App risk level</label><br>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >Low</a>
+                <a class="dropdown-item" >Medium</a>
+                <a class="dropdown-item" >High</a>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+        
+          <div class="right">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Owning business</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" >
+            </div>
+          </div>
+
+        </div>
+
+      <!-----------------------Row 3------------------------->
+
+      <div class="left">
+        <div class="form-group">
+          <label for="formGroupExampleInput">App landing page URL</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" >
+        </div>
+      </div>
+
+      <!-----------------------Row 4------------------------->
+        
+      <div class="row3">
+        <div class="left">
+            <label>Content hosting platform</label><br>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >AEM</a>
+                <a class="dropdown-item" >Category-2</a>
+                <a class="dropdown-item" >Category-3</a>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+
+
+          <div class="right">
+            <label>Shareable via social media?</label><br>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >Yes</a>
+                <a class="dropdown-item" >No</a>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+      </div>
+
+      <!-----------------------Row 5------------------------->
+
+    <div class="left">
+      <label>Primary country regions for which app access is allowed</label><br>
+      <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ---Select---
+        </a>
+      
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" >APAC</a>
+          <a class="dropdown-item" >East Asia</a>
+          <a class="dropdown-item" >Japan</a>
+          <a class="dropdown-item" >SSP</a>
+
+        </div>
+      </div>
+        <br>
+        <br>
+    </div>
+
+    <div class="left">
+
+        <div class="form-group">
+          <label for="formGroupExampleInput">Support contact information for primary country regions</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" >
+        </div>
+
+
+        <label>Secondary country regions for which app access is allowed</label><br>
+      <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ---Select---
+        </a>
+      
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" >APAC</a>
+          <a class="dropdown-item" >East Asia</a>
+          <a class="dropdown-item" >Japan</a>
+          <a class="dropdown-item" >SSP</a>
+
+        </div>
+      </div>
+        <br>
+        <br>
+    </div>
+
+      <div class="left">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Support contact information for secondary country regions</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" >
+        </div>
+      </div>
+
+      <!------------------Row 6--------->
+      <div class="row4">
+          <div class="left">
+            <label>Target Audience</label><br>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >HCPs</a>
+                <a class="dropdown-item" >Dealers</a>
+                <a class="dropdown-item" >Non HCP Businesses</a>
+                <a class="dropdown-item" >General public</a>
+      
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+          <div class="right">
+            <label>Access Pattern</label><br>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >Automatic</a>
+                <a class="dropdown-item" >Manual</a>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+        </div>
+
+        <!-------Row 7----->
+
+
+        <div class="row5">
+        <div class="left">
+            <label>App request policy</label><br>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >Self-service</a>
+                <a class="dropdown-item" >Self-service provider</a>
+              </div>
+            </div>
+            <br>
+            <br>
+        </div>
+        <div class="right">
+            <label>Rules for non HCPs</label><br>
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ---Select---
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" >Open</a>
+                <a class="dropdown-item" >Restricted</a>
+              </div>
+            </div>
+            <br>
+            <br>
+        </div>
+      </div>
+
+    <!-------Row 8------->
+
+    <div class="row6">
+      <div class="left">
+        <label>Access Policy for Non-EEMEA/US residents</label><br>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ---Select---
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" >Self-service</a>
+            <a class="dropdown-item" >Self-service provider</a>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+
+      <!---OpenRequires ApprovalDenied---->
+      <div class="right">
+        <label>Rules for Stryker Employees</label><br>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ---Select---
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" >Open</a>
+            <a class="dropdown-item" >Requires approval</a>
+            <a class="dropdown-item" >Denied</a>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+        </div>
+
+      <div class="left">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Blocked domains</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" >
+        </div>
+      </div>
+
+      <div class="btn-cnt">
+        <button (click)="myFunction()" class="save-button">SAVE</button>
+      </div>
+
+  </div>
+
+</div>

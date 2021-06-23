@@ -1,0 +1,114 @@
+[
+    {
+    "type": "text",
+    "icon": "fa-font",
+    "label": "Text",
+    "description": "Enter your text",
+    "placeholder": "Enter your text",
+    "className": "form-control",
+    "subtype": "text",
+    "regex" : "",
+    "handle":true
+  },
+  {
+    "type": "email",
+    "icon": "fa-envelope",
+    "required": true,
+    "label": "Email",
+    "description": "Enter your email",
+    "placeholder": "Enter your email",
+    "className": "form-control",
+    "subtype": "text",
+    "regex" : "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)([a-zA-Z]{2,5})$",
+    "errorText": "Please enter a valid email",
+    "handle":true
+  },
+  {
+    "type": "phone",
+    "icon": "fa-phone",
+    "label": "Phone",
+    "description": "Enter your phone",
+    "placeholder": "Enter your phone",
+    "className": "form-control",
+    "subtype": "text",
+    "regex" : "^[+]?[(]?[0-9]{3}[)]?[-]?[0-9]{3}[]?[0-9]{4,6}$",
+    "errorText": "Please enter a valid phone number",
+    "handle":true
+  },
+  {
+    "type": "date",
+    "icon":"fa-calendar",
+    "label": "Date",
+    "placeholder": "Date",
+    "className": "form-control"
+  },
+  {
+    "type": "checkbox",
+    "required": true,
+    "label": "Checkbox",
+    "icon":"fa-chevron-circle-down",
+    "description": "Checkbox",
+    "inline": true,
+    "values": [
+      {
+        "label": "Option 1",
+        "value": "option-1"
+      },
+      {
+        "label": "Option 2",
+        "value": "option-2"
+      }
+    ]
+  },
+  {
+    "type": "radio",
+    "icon":"fa-list-ul",
+    "label": "Radio",
+    "description": "Radio boxes",
+    "values": [
+      {
+        "label": "Option 1",
+        "value": "option-1"
+      },
+      {
+        "label": "Option 2",
+        "value": "option-2"
+      }
+    ]
+  },
+  {
+    "type": "autocomplete",
+    "icon":"fa-bars",
+    "label": "Select",
+    "description": "Select",
+    "placeholder": "Select",
+    "className": "form-control",
+    "values": [
+      {
+        "label": "Option 1",
+        "value": "option-1"
+      },
+      {
+        "label": "Option 2",
+        "value": "option-2"
+      },
+      {
+        "label": "Option 3",
+        "value": "option-3"
+      }
+    ]
+  },
+  {
+    "type": "file",
+    "icon":"fa-file",
+    "label": "File Upload",
+    "className": "form-control",
+    "subtype": "file"
+  },
+  {
+    "type": "button",
+    "icon":"fa-paper-plane",
+    "subtype": "submit",
+    "label": "Submit"
+  }
+]
