@@ -1,8 +1,12 @@
 .topnav {
     background-color:#4f5956;
-    overflow: hidden;
-    width: auto;
-    height: auto;
+    margin-top: 10%;
+    margin-left: -2%;
+    margin-right: 0;
+    padding-left: 30px;
+    width: 110%;
+    position: fixed;
+    z-index: 1;
   }
   
   /* Style the links inside the navigation bar */

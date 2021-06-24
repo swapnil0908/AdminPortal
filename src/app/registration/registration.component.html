@@ -1,4 +1,6 @@
 <!--one row divided into three components-->
+<script src="https://cdn.rawgit.com/blowsie/Pure-JavaScript-HTML5-Parser/master/htmlparser.js"></script>
+<script src="src/html2json.js"></script>
 <div class="row">
   <!--column 1 - Draggable List-->
   <div class="column-1" style="background-color:rgb(255, 255, 255);">
@@ -16,8 +18,9 @@
   </div>
 
   <!--column 2 - Droppable Area-->
-  <div class="column-2" style="background-color:rgb(255, 255, 255);">
+  <div class="column-2" id="column-2" style="background-color:rgb(255, 255, 255);">
     <!--top half-->
+    <div class="preview" id="preview">
       <h6><b>Form name</b></h6>
           <input name="form-name" class="col-2-static-name" type="text" [(ngModel)]="model.name" /><br>
       <h6><b>Form description</b></h6>
@@ -25,130 +28,134 @@
       <h6><b>Date created</b></h6>
           <input name="date-created" class="col-2-static-date" type="date" [(ngModel)]="model.date" /><br>
 
-          
-
     <!--Bottom Half - Drappable zone-->
-      <section dndDropzone
+    <section dndDropzone
       (dndDragover)="onDragover($event)"
       (dndDrop)="onDrop($event,model.attributes)" class="dndDropArea"
       [ngClass]="{'empty':model.attributes.length == 0}"
       [style.backgroundColor]="model.theme.bgColor"
       [style.color]="model.theme.textColor">
 
-
-      <div class="field" *ngFor="let item of model.attributes;let i= index;" 
-      [ngClass]="item.toggle ? 'form-group-2' : 'form-group-1'"
-        (dndStart)="onDragStart($event)"
-        (dndCanceled)="onDragCanceled($event)"
-        (dndMoved)="onDragged(item, model.attributes, 'move')"
-        [dndEffectAllowed]="'all'" 
-        [dndDraggable]="item">
+              <div class="field" *ngFor="let item of model.attributes;let i= index;" 
+              [ngClass]="item.toggle ? 'form-group-2' : 'form-group-1'"
+                (dndStart)="onDragStart($event)"
+                (dndCanceled)="onDragCanceled($event)"
+                (dndMoved)="onDragged(item, model.attributes, 'move')"
+                [dndEffectAllowed]="'all'" 
+                [dndDraggable]="item">
         
           <!--DROPZONE-->
-          <div class="drop-zone"><i (click)= "iconPopUp()" class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
-        <!--  <div class="box stack-top" id="stack-top" style="display: none;"></div> -->
-        
-                <!--display text div-->
-                <div (click)="displayColumn3Text(text)" *ngIf="item.type=='text'" class = "dropped-element-text">
-                      <div id="text-form"><label>Text Label placeholder</label></div> 
-                      <input type="text" class="form-control" id="text-form-id" placeholder="Value placeholder">
-                </div>
                 
-                <div (click)="displayColumn3Email(email)" *ngIf="item.type=='email'" class = "dropped-element-email">
-                  <div id="email-form"><label>Email Label placeholder</label></div> 
-                  <input type="email" class="form-control" id="email-form-id" placeholder="Value placeholder">
-                </div>
-            
-                <div (click)="displayColumn3Phone(phone)" *ngIf="item.type=='phone'" class = "dropped-element-phone">
-                  <div id="phone-form"><label>Phone Label placeholder</label></div> 
-                  <input type="phone" class="form-control" id="phone-form-id" placeholder="Value placeholder">
-                </div>
-                
-                <div (click)="displayColumn3Select(select)" *ngIf="item.type=='autocomplete'" class = "dropped-element-select">
-                  <div id="select-form"><label>Select Label placeholder</label></div> 
-                  <input type="text" class="form-control" id="select-form-id" placeholder="Value1 placeholder">
-
-                  <div class="dropdown">
-                    <select [(ngModel)]="selectedOptionLabel1" class="selectpicker" id="selectpickerId" 
-                        data-style="btn-success">
-                        <option value="" selected disabled>---Select---</option>
-                          <option>Healthcare Professional</option>
-                          <option>Dealer</option>  
-                    </select>
+                  <div (click)="displayColumn3Text(text)" *ngIf="item.type=='text'" class = "dropped-element-text">
+                    <div class="drop-zone"><i (click)= "removeField(i,'text')" class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                        <div id="text-form"><label>Text Label placeholder</label></div> 
+                        <input type="text" class="form-control" id="text-form-id" placeholder="Value placeholder">
                   </div>
+                          
+                  <div (click)="displayColumn3Email(email)" *ngIf="item.type=='email'" class = "dropped-element-email">
+                    <div class="drop-zone"><i (click)= "removeField(i,'email')" class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                    <div id="email-form"><label>Email Label placeholder</label></div> 
+                    <input type="email" class="form-control" id="email-form-id" placeholder="Value placeholder">
+                  </div>
+              
+                  <div (click)="displayColumn3Phone(phone)" *ngIf="item.type=='phone'" class = "dropped-element-phone">
+                    <div class="drop-zone"><i (click)= "removeField(i,'phone')" class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                    <div id="phone-form"><label>Phone Label placeholder</label></div> 
+                    <input type="phone" class="form-control" id="phone-form-id" placeholder="Value placeholder">
+                  </div>
+                          
+                    <div (click)="displayColumn3Select(select)" *ngIf="item.type=='autocomplete'" class = "dropped-element-select">
+                      <div class="drop-zone"><i (click)= "removeField(i,'select')" class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                            <div id="select-form"><label>Select Label placeholder</label></div> 
+                            <input type="text" class="form-control" id="select-form-id" placeholder="Value1 placeholder"> 
+                            <div class="dropdown">
+                              <select [(ngModel)]="selectedOptionLabel1" class="selectpicker" id="selectpickerId" 
+                                  data-style="btn-success">
+                                  <option value="" selected disabled>---Select---</option>
+                                    <option>Healthcare Professional</option>
+                                    <option>Dealer</option>  
+                              </select>
+                            </div>
 
-                                  <div *ngIf="selectedOptionLabel1=='Healthcare Professional'">
+                            <div *ngIf="selectedOptionLabel1=='Healthcare Professional'">
+                                <div class="dropdown">
+                                  <select [(ngModel)]="selectedOptionLabel2" class="selectpicker" id="selectpickerId" 
+                                    data-style="btn-success">
+                                    <option value="" selected disabled>---Select Role in Healthcare---</option>
+                                      <option>Clinical Services / Technician</option>
+                                      <option>Healthcare Executive</option>
+                                      <option>Administration / Operations</option>
+                                      <option>Administration / Operations</option>
+                                      <option>Medical Care provider</option>
+                                      <option>Allied Health Care professional</option>
+                                  </select>
+                                </div>
+                            </div>
 
-                                    <div class="dropdown">
-                                      <select [(ngModel)]="selectedOptionLabel2" class="selectpicker" id="selectpickerId" 
-                                          data-style="btn-success">
-                                          <option value="" selected disabled>---Select Role in Healthcare---</option>
-                                            <option>Clinical Services / Technician</option>
-                                            <option>Healthcare Executive</option>
-                                            <option>Administration / Operations</option>
-                                            <option>Administration / Operations</option>
-                                            <option>Medical Care provider</option>
-                                            <option>Allied Health Care professional</option>
-                                      </select>
-                                    </div>
-                                  </div>
-
-                                                  <div *ngIf="selectedOptionLabel2=='Clinical Services / Technician'">
-                                                    <div class="dropdown">
-                                                      <select [(ngModel)]="selectedOptionLabel4" class="selectpicker" id="selectpickerId" 
-                                                          data-style="btn-success">
-                                                          <option value="" selected disabled>---Clinical Services/Technician Specialties---</option>
-                                                            <option>Biomedical Engineering</option>
-                                                            <option>Surgical Tech/assistant</option>
-                                                            <option>Anesthesia Tech/assistant</option>
-                                                      </select>
-                                                    </div>
-                                                  </div>
-
-
-                                                  <div *ngIf="selectedOptionLabel2=='Healthcare Executive'">
-                                                    <div class="dropdown">
-                                                      <select [(ngModel)]="selectedOptionLabel5" class="selectpicker" id="selectpickerId" 
-                                                          data-style="btn-success">
-                                                          <option value="" selected disabled>---Leadership Focus---</option>
-                                                            <option>Clinical Support Services</option>
-                                                            <option>Medical Care</option>
-                                                            <option>Nursing services</option>
-                                                            <option>Owner</option>
-                                                            <option>Financial Management</option>
-                                                      </select>
-                                                    </div>
-                                                  </div>
+                            <div *ngIf="selectedOptionLabel2=='Clinical Services / Technician'">
+                              <div class="dropdown">
+                                <select [(ngModel)]="selectedOptionLabel4" class="selectpicker" id="selectpickerId" 
+                                    data-style="btn-success">
+                                    <option value="" selected disabled>---Clinical Services/Technician Specialties---</option>
+                                      <option>Biomedical Engineering</option>
+                                      <option>Surgical Tech/assistant</option>
+                                      <option>Anesthesia Tech/assistant</option>
+                                </select>
+                              </div>
+                            </div>
 
 
-                                  <div *ngIf="selectedOptionLabel1=='Dealer'">
+                            <div *ngIf="selectedOptionLabel2=='Healthcare Executive'">
+                              <div class="dropdown">
+                                <select [(ngModel)]="selectedOptionLabel5" class="selectpicker" id="selectpickerId" 
+                                    data-style="btn-success">
+                                    <option value="" selected disabled>---Leadership Focus---</option>
+                                      <option>Clinical Support Services</option>
+                                      <option>Medical Care</option>
+                                      <option>Nursing services</option>
+                                      <option>Owner</option>
+                                      <option>Financial Management</option>
+                                </select>
+                              </div>
+                            </div>
 
-                                    <div class="dropdown">
-                                      <select [(ngModel)]="selectedOptionLabel3" class="selectpicker" id="selectpickerId" 
-                                          data-style="btn-success">
-                                          <option value="" selected disabled>---Select Management Level---</option>
-                                            <option>Employee / Consultant</option>
-                                            <option>Supervisor</option>
-                                            <option>Department Head / Manager</option>
-                                            <option>Chief / Director</option> 
-                                      </select>
-                                    </div>
-                                  </div>
-                
-                </div>
 
-          </div> 
-        
-            <!--optional placeholder element for dropzone-->
-            <!--will be removed from DOM on init-->
-          <div class="dndPlaceholder" dndPlaceholderRef>
-          </div>
-        
-      </section>
+                            <div *ngIf="selectedOptionLabel1=='Dealer'">
+                              <div class="dropdown">
+                                <select [(ngModel)]="selectedOptionLabel3" class="selectpicker" id="selectpickerId" 
+                                    data-style="btn-success">
+                                    <option value="" selected disabled>---Select Management Level---</option>
+                                      <option>Employee / Consultant</option>
+                                      <option>Supervisor</option>
+                                      <option>Department Head / Manager</option>
+                                      <option>Chief / Director</option> 
+                                </select>
+                              </div>
+                            </div>  
+                                    
+                      </div>
+
+                    </div> 
+                  
+                    <!--blue area while dropping elements-->
+                    <div class="dndPlaceholder" dndPlaceholderRef>
+                    </div>
+    
+    </section>
+    </div>
+
       <div class="btn-cont">
-        <button (click)="initReport()" class="save-button">SAVE</button>
+        <button (click)="save()" class="save-button" >SAVE</button><br>
+
+        <div class="popup">
+          <button (click)="preview()" class="preview-button" >PREVIEW</button>
+            <div class="popuptext" id="myPopup"></div>
+        </div>
+        
+        <button class="view-forms" routerLink="/save-form">VIEW SAVED FORMS</button><br>
+        
       </div>
-      <!--<button onclick="myFunction()">SAVE</button>-->
+      <!--<button onclick="myFunction() routerLink="/save-form"">SAVE</button> -->
   </div>
 
 

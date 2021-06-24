@@ -1,10 +1,10 @@
 .header{
     background-color: rgb(255, 190, 24);
-    height: auto;
-    width: auto;
-    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
 }
-
 
 .menu{
     background-color: #4f5956;
@@ -18,7 +18,7 @@
 }
 
 h1{
-    margin-left: 90px;
+    margin-left: 30px;
     align-content: center;
 }
 
