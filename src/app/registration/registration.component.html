@@ -18,8 +18,13 @@
   </div>
 
   <!--column 2 - Droppable Area-->
+  <div class="sub-nav-bar">
+    <button class="sub-nav-bar-edit" (click)="edit()">EDIT</button>
+    <button class="sub-nav-bar-preview" (click)="preview()">PREVIEW</button>
+  </div>
+
+
   <div class="column-2" id="column-2" style="background-color:rgb(255, 255, 255);">
-    <!--top half-->
     <div class="preview" id="preview">
       <h6><b>Form name</b></h6>
           <input name="form-name" class="col-2-static-name" type="text" [(ngModel)]="model.name" /><br>
@@ -142,20 +147,23 @@
                     </div>
     
     </section>
-    </div>
+  </div>
+<!--end of preview--->
 
       <div class="btn-cont">
-        <button (click)="save()" class="save-button" >SAVE</button><br>
-
+        <button (click)="save()" class="save-button" >SAVE</button>
+        <!--
         <div class="popup">
           <button (click)="preview()" class="preview-button" >PREVIEW</button>
             <div class="popuptext" id="myPopup"></div>
-        </div>
-        
-        <button class="view-forms" routerLink="/save-form">VIEW SAVED FORMS</button><br>
+        </div> -->
+        <button class="view-forms" routerLink="/save-form">SAVED FORMS</button><br>
         
       </div>
       <!--<button onclick="myFunction() routerLink="/save-form"">SAVE</button> -->
+  </div>
+  <!--end of column 2-->
+  <div class="preview-test" id="preview-test">
   </div>
 
 

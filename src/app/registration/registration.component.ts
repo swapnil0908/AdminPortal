@@ -32,6 +32,8 @@ export class RegistrationComponent implements OnInit {
   };
   success = false;
 
+ 
+
 //For the purpose of localization we are storing all the menu items, corresponding labels and values in separate json files.
 
 //menu data 
@@ -55,6 +57,7 @@ public selectLabel: any = (selectLabelData as any).default;
 
 
 //Array objects for labels and names
+
 
 //array for text data
 labelModels:Array<field>=this.labels;
@@ -147,12 +150,22 @@ onDrop( event:DndDropEvent, list?:any[] ) {
 
 //code to display div on drop event
 
+
+//add transition effect
+var col2 = document.getElementById('column-2');
+col2.style.width = "45%";
+col2.style.transition = "1s";
+
+var col2 = document.getElementById('columnId-3')
+col2.style.display = "block";
+
+
 //if the dropped label is 'text' - hide all other divs in column-3 and display menu for text in column 3
   if(event.data.label === "Text"){
     var x = document.getElementById('columnTextId-3');
     this.hideOtherDivs(x);
     x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "0.3s";
+    x.style.transition = "1s";
     x.style.padding = "5%";
     x.style.display = "block";  
   }
@@ -287,32 +300,43 @@ setPhoneLabel(x,y,required){
   document.getElementById("phone-form").append("*");
 }
 
+edit(){
+  var my_div = document.getElementById('preview-test');
+  my_div.style.display = "none";
 
-//!!! logic to should be triggered only after the form is saved - need to work on this as it doesn't workk entirely right
+  var col2 = document.getElementById('column-2');
+  col2.style.display = "block";
+
+}
 
 //preview the form.
 preview(){
   //logic to toggle preview popup
-
+  var col2 = document.getElementById('column-2');
+  col2.style.display = "none";
   //if the new div is created then check if dsiplay is none or block and toggle.
   if(document.getElementById('new_div') != null){
-    if(document.getElementById('new_div').style.display === "none"){
-          document.getElementById('new_div').style.display = "block";
+   // if(document.getElementById('new_div').style.display === "none"){
+          document.getElementById('preview-test').style.display = "block";
+    //      document.getElementById('new_div').style.display = "block";
           document.getElementById('new_div').style.margin = "2%";
           document.getElementById('new_div').style.padding = "2%";
-          document.getElementById('new_div').style.width = "80%";
-          document.getElementById('new_div').style.height = "80%";
+          document.getElementById('new_div').style.marginTop = "2%";
+          document.getElementById('new_div').style.width = "40%";
+          document.getElementById('new_div').style.height = "auto%";
           document.getElementById('new_div').style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
           document.getElementById('new_div').style.transition = "width height 2s";
-    }
-    else if(document.getElementById('new_div').style.display === "block")
+  //  }
+   /* else if(document.getElementById('new_div').style.display === "block"){
           document.getElementById('new_div').style.display = "none";
-    return
+          document.getElementById('preview-test').style.display = "none";
+    }*/
   }
 }
 
 //function to get preview div and convert it to json and html
 save(){
+  console.log("form saved");
   //if new div has already been created then update it
   if(document.getElementById('new_div') != null){
       //extract div element of which need json
@@ -328,7 +352,10 @@ save(){
 
       //stringify the json
       var theJSON = JSON.stringify(json);
-      console.log(theJSON);
+      //console.log(theJSON);
+      
+    
+      //console.log(save_data[0]);
 
       //get html of that json
       var html = json2html(json);
@@ -341,16 +368,17 @@ save(){
       var json2html = require('html2json').json2html;
       var json =  html2json(elements.innerHTML);
       var theJSON = JSON.stringify(json);
-      console.log(theJSON);
+      //console.log(theJSON);
       var html = json2html(json);
-      var old_div = document.getElementById('myPopup');
+      var old_div = document.getElementById('preview-test');
       var new_div = document.createElement('div');
       new_div.id = "new_div";
-      new_div.style.display = "none";
-      new_div.style.width = "0";
-      new_div.style.width = "0";
+      new_div.style.display = "block";
+      new_div.style.width = "80%";
+      new_div.style.width = "80%";
       new_div.innerHTML = html;
       old_div.appendChild(new_div);
+      
   }
 
 }
@@ -416,6 +444,10 @@ displayColumn3Select(){
 closeFunction(id){
   var x = document.getElementById(id);
   x.style.display = "none";
+
+  var col2 = document.getElementById('column-2');
+  col2.style.width = "75%";
+  col2.style.transition = "1s";
 }
 
 //note sure what this is used for??
