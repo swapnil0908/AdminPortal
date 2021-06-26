@@ -3,17 +3,21 @@ import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { field, value } from '../global.model';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
-import * as menudata from './menu-data.json';
-import * as labelsData from './text-labels.json';
-import * as emaillabelsData from './emailLabels.json';
-import * as namesData from './names.json';
-import * as emailValues from './emailValue.json';
-import * as phoneLabelData from './phoneLabels.json';
-import * as phoneValueData from './phoneValue.json';
-import * as selectLabelData from './selectLabel.json';
-import * as selectValueData from './selectValue.json';
+import * as menudata from './json-files/menu-json/menu-data.json';
+import * as labelsData from './json-files/text-json/text-labels.json';
+import * as namesData from './json-files/text-json/names.json';
+
+import * as emaillabelsData from './json-files/email-json/emailLabels.json';
+import * as emailValues from './json-files/email-json/emailValue.json';
+
+import * as phoneLabelData from './json-files/phone-json/phoneLabels.json';
+import * as phoneValueData from './json-files/phone-json/phoneValue.json';
+
+import * as selectLabelData from './json-files/dropdown-json/selectLabel.json';
+import * as selectValueData from './json-files/dropdown-json/selectValue.json';
 import { $, element } from 'protractor';
 import { style } from '@angular/animations';
+import Swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
 
 @Component({
@@ -31,6 +35,11 @@ export class RegistrationComponent implements OnInit {
     value:""
   };
   success = false;
+
+  result: string;
+  selectedOptionLabel: string;
+  selectedOptionValue: string;
+  selectedOptionName: string;
 
  
 
@@ -153,7 +162,7 @@ onDrop( event:DndDropEvent, list?:any[] ) {
 
 //add transition effect
 var col2 = document.getElementById('column-2');
-col2.style.width = "45%";
+col2.style.width = "43%";
 col2.style.transition = "1s";
 
 var col2 = document.getElementById('columnId-3')
@@ -175,7 +184,7 @@ col2.style.display = "block";
     var x = document.getElementById("columnEmailId-3");
     this.hideOtherDivs(x);
     x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "0.3s";
+    x.style.transition = "1s";
     x.style.padding = "5%";
     x.style.display = "block"
   }
@@ -185,7 +194,7 @@ col2.style.display = "block";
     var x = document.getElementById("columnPhoneId-3");
     this.hideOtherDivs(x);
     x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "0.3s";
+    x.style.transition = "1s";
     x.style.padding = "5%";
     x.style.display = "block";
 
@@ -196,21 +205,22 @@ col2.style.display = "block";
     var x = document.getElementById("columnSelectId-3");
     this.hideOtherDivs(x);
     x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "0.3s";
+    x.style.transition = "1s";
     x.style.padding = "5%";
     x.style.display = "block";
 
   }
 }
 
-addValue(values){
-  values.push(this.value);
-  this.value={label:"",value:""};
-}
+// addValue(values){
+//   values.push(this.value);
+//   this.value={label:"",value:""};
+// }
+
 
 //function call to show pop up on deleting a field - should delete column 3 as well and remove from saved form as well
 removeField(i,type){
-  swal({
+  Swal.fire({
     title: 'Are you sure?',
     text: "Do you want to remove this field?",
     type: 'warning',
@@ -219,7 +229,6 @@ removeField(i,type){
     cancelButtonColor: '#d33',
     confirmButtonText: 'Yes, remove!'
   }).then((result) => {
-    //delete column 3 as well
     if (result.value) {
       this.model.attributes.splice(i,1);
       if(type === 'text'){
@@ -242,7 +251,7 @@ removeField(i,type){
   });
 }
 
-/*
+/* no need
 updateForm(){
   let input = new FormData;
   input.append('id',this.model._id);
@@ -258,16 +267,17 @@ updateForm(){
 
 
 //no use right now - but can be used to get length of the amount of dropped items
-initReport(){
-  this.report = true; 
-  let input = {
-    id:this.model._id
-  }
+
+// initReport(){
+//   this.report = true; 
+//   let input = {
+//     id:this.model._id
+//   }
    
-console.log(this.model.name);
-console.log(this.model.description);
-console.log(this.model.date);
-}
+// console.log(this.model.name);
+// console.log(this.model.description);
+// console.log(this.model.date);
+// }
 
 
 //set text label after selecting value from column-3 drop down
@@ -312,6 +322,7 @@ edit(){
 //preview the form.
 preview(){
   //logic to toggle preview popup
+  console.log("preview button");
   var col2 = document.getElementById('column-2');
   col2.style.display = "none";
   //if the new div is created then check if dsiplay is none or block and toggle.
@@ -322,7 +333,7 @@ preview(){
           document.getElementById('new_div').style.margin = "2%";
           document.getElementById('new_div').style.padding = "2%";
           document.getElementById('new_div').style.marginTop = "2%";
-          document.getElementById('new_div').style.width = "40%";
+          document.getElementById('new_div').style.width = "43%";
           document.getElementById('new_div').style.height = "auto%";
           document.getElementById('new_div').style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
           document.getElementById('new_div').style.transition = "width height 2s";
@@ -372,7 +383,7 @@ save(){
       var html = json2html(json);
       var old_div = document.getElementById('preview-test');
       var new_div = document.createElement('div');
-      new_div.id = "new_div";
+      new_div.id = 'new_div';
       new_div.style.display = "block";
       new_div.style.width = "80%";
       new_div.style.width = "80%";
@@ -384,27 +395,28 @@ save(){
 }
 
 
-//!!!!function to write saved data to a file - need to work on this
+// //!!!!function to write saved data to a file - need to work on this
 
-/*
-outputJSONfile(data){
+// /*
+// outputJSONfile(data){
   
-  const fs = require('fs');
-  fs.writeFile("output.json", data, 'utf8', function (err) {
-    if (err) {
-        console.log("An error occured while writing JSON Object to File.");
-        return console.log(err);
-    }
+//   const fs = require('fs');
+//   fs.writeFile("output.json", data, 'utf8', function (err) {
+//     if (err) {
+//         console.log("An error occured while writing JSON Object to File.");
+//         return console.log(err);
+//     }
   
-    console.log("JSON file has been saved.");
-});
-}*/
+//     console.log("JSON file has been saved.");
+// });
+// }*/
 
 
 
 //function to hide all other divs when a label is dropped and clicked on  
 hideOtherDivs(div){
   var Divs = ['columnTextId-3', 'columnEmailId-3','columnPhoneId-3','columnSelectId-3'];
+  //var Divs = ['columnTextId-3'];
   for(var i=0;i<Divs.length;i++){
     if(div != document.getElementById(Divs[i])){
       document.getElementById(Divs[i]).style.display = "none";
@@ -412,10 +424,18 @@ hideOtherDivs(div){
   }
 }
 
+column2Transition(){
+  var col2 = document.getElementById('column-2');
+  col2.style.width = "43%";
+  col2.style.transition = "1s";
+
+}
+
 //diplay column 3 for text item on click
 displayColumn3Text() {
   var x = document.getElementById("columnTextId-3");
   this.hideOtherDivs(x)
+  this.column2Transition();
   x.style.display = "block";
 }
 
@@ -423,6 +443,7 @@ displayColumn3Text() {
 displayColumn3Email() {
   var x = document.getElementById("columnEmailId-3");
   this.hideOtherDivs(x);
+  this.column2Transition();
   x.style.display = "block";
 }
 
@@ -430,6 +451,7 @@ displayColumn3Email() {
 displayColumn3Phone() {
   var x = document.getElementById("columnPhoneId-3");
   this.hideOtherDivs(x);
+  this.column2Transition();
   x.style.display = "block";
 }
 
@@ -437,6 +459,7 @@ displayColumn3Phone() {
 displayColumn3Select(){
   var x = document.getElementById("columnSelectId-3");
   this.hideOtherDivs(x)
+  this.column2Transition();
   x.style.display = "block";
 }
   
@@ -450,45 +473,45 @@ closeFunction(id){
   col2.style.transition = "1s";
 }
 
-//note sure what this is used for??
-/*
-toggleValue(item){
-  item.selected = !item.selected;
-}*/
+// //note sure what this is used for??
+// /*
+// toggleValue(item){
+//   item.selected = !item.selected;
+// }*/
+// /*
+// submit(){
+//   let valid = true;
+//   let validationArray = JSON.parse(JSON.stringify(this.model.attributes));
+//   validationArray.reverse().forEach(field => {
+//     console.log(field.label+'=>'+field.required+"=>"+field.value);
+//     if(field.required && !field.value && field.type != 'checkbox'){
+//       swal('Error','Please enter '+field.label,'error');
+//       valid = false;
+//       return false;
+//     }
+//     if(field.required && field.regex){
+//       let regex = new RegExp(field.regex);
+//       if(regex.test(field.value) == false){
+//         swal('Error',field.errorText,'error');
+//         valid = false;
+//         return false;
+//       }
+//     }
+//     if(field.required && field.type == 'checkbox'){
+//       if(field.values.filter(r=>r.selected).length == 0){
+//         swal('Error','Please enterrr '+field.label,'error');
+//         valid = false;
+//         return false;
+//       }
 
-submit(){
-  let valid = true;
-  let validationArray = JSON.parse(JSON.stringify(this.model.attributes));
-  validationArray.reverse().forEach(field => {
-    console.log(field.label+'=>'+field.required+"=>"+field.value);
-    if(field.required && !field.value && field.type != 'checkbox'){
-      swal('Error','Please enter '+field.label,'error');
-      valid = false;
-      return false;
-    }
-    if(field.required && field.regex){
-      let regex = new RegExp(field.regex);
-      if(regex.test(field.value) == false){
-        swal('Error',field.errorText,'error');
-        valid = false;
-        return false;
-      }
-    }
-    if(field.required && field.type == 'checkbox'){
-      if(field.values.filter(r=>r.selected).length == 0){
-        swal('Error','Please enterrr '+field.label,'error');
-        valid = false;
-        return false;
-      }
-
-    }
-  });
-  if(!valid){
-    return false;
-  }
-  console.log('Save',this.model);
-  let input = new FormData;
-  input.append('formId',this.model._id);
-  input.append('attributes',JSON.stringify(this.model.attributes))
-}
+//     }
+//   });
+//   if(!valid){
+//     return false;
+//   }
+//   console.log('Save',this.model);
+//   let input = new FormData;
+//   input.append('formId',this.model._id);
+//   input.append('attributes',JSON.stringify(this.model.attributes))
+// }*/
 }

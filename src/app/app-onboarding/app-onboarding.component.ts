@@ -54,5 +54,9 @@ export class AppOnboardingComponent implements OnInit {
     }
   }
 
+  myFunction(){
+    
+  }
+
 
 }

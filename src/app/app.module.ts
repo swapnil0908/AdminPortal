@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DndModule } from 'ngx-drag-drop';
-import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {NavigationBarComponent} from './navigation-bar/navigation-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppOnboardingComponent } from './app-onboarding/app-onboarding.component';
