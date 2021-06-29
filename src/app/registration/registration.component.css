@@ -154,9 +154,6 @@
   .dropped-element-text, .dropped-element-email,.dropped-element-phone, .dropped-element-date, .dropped-element-select
   {
     cursor: pointer;
-    align-items: center;
-    padding-left: 2%;
-    padding-right: 5%;
   }
 
   h6{
@@ -179,9 +176,10 @@
     padding-left: 2%;
     padding-right: 2%;
     width: 60%;
+    font-size: small;
   }
 
-  .save-button, .add-button, .preview-button, .view-forms{
+  .save-button, .add-button, .preview-button, .view-forms, .submit-button, .add-options-button, .add-conditonal-logic-button{
     background-color: rgb(70, 129, 110);
     border: none;
     color: white;
@@ -206,6 +204,7 @@
 
   .dropdown{
     width: 100%;
+    font-size: small;
   }
 
 select{
@@ -232,7 +231,42 @@ select{
   color: white;
 }
 
-  
+.title{
+  background-color: aqua;
+}
+
+.stryker-logo{
+  width: 100px;
+  height: 60px;
+  background-color: aqua;
+}
+
+.form-section{
+  border: none;
+  border-bottom: 1px, dashed, rgb(146, 146, 146);
+  width: 100%;
+  margin-bottom: 2%;
+  font-size: small;
+}
+
+.check-box{
+  display: inline-block;
+}
+
+.form-group{
+  font-size: small;
+}
+
+.text-form{
+  border: none;
+  border-bottom: 1px, dashed, rgb(146, 146, 146);
+}
+
+.conditional-logic-options{
+  display: none;
+}
+
+
 
 
 

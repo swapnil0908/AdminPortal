@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as data from './json-files/appOnboarding.json';
+
 
 @Component({
   selector: 'app-app-onboarding',
@@ -17,6 +19,10 @@ export class AppOnboardingComponent implements OnInit {
   openAppMetadata(){
     document.getElementById("columnId-2").style.width = "90%";
   }
+
+
+  public app_data: any = (data as any).default;
+  app_data_model:Array<any>=this.app_data;
 
   dropDownFunction(number){
     if(number === 1){

@@ -1,0 +1,23 @@
+[ 
+  {
+    "type": "text",
+    "title": "App name",
+    "values": "app name placeholder"
+  },
+
+  {
+    "type": "select",
+    "title":  "Marketing Application Category",
+    "values": [
+      {
+        "value": "option-1"
+      },
+      {
+        "value": "option-2"
+      },
+      {
+        "value": "option-3"
+      }
+    ]
+  }   
+ ]

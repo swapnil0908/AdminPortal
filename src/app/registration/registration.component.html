@@ -4,7 +4,10 @@
 <div class="row">
   <!--column 1 - Draggable List-->
 <div class="column-1" style="background-color:rgb(255, 255, 255);">
-    <h6><b>Add form Section/field</b></h6>
+    
+      <h6><b>Add form Section/field</b></h6>
+      <!-- <h6><b *ngFor="let item of fieldModels">{{item.title}}</b></h6>  -->
+
     <div class="fields" *ngFor="let item of fieldModels">
         <div class="field pointer shadow-bg" [dndDraggable]="item"
           [dndEffectAllowed]="'copy'" 
@@ -12,33 +15,44 @@
           <div class="icons-col1">
             <i [ngClass]="item.icon" class="fa pull-left"></i>
           </div>
-          <div class="vertical-list"><h6>{{item.label}}</h6>
+          <div class="vertical-list"> <h6>{{item.label}}</h6>
           </div>
         </div>
     </div>
 </div>
 
+
   <!--column 2 - Droppable Area-->
 <div class="sub-nav-bar">
   <button class="sub-nav-bar-edit" (click)="edit()">EDIT</button>
   <button class="sub-nav-bar-preview" (click)="preview()">PREVIEW</button>
+  <button (click)="save()" class="save-button" >SAVE</button>
+  <button class="view-forms" routerLink="/save-form">SAVED FORMS</button><br>
 </div>
 
 <div class="column-2" id="column-2" style="background-color:rgb(255, 255, 255);">
-    <div class="preview" id="preview">
-          <h6><b>Form name</b></h6>
-          <input name="form-name" class="col-2-static-name" type="text" [(ngModel)]="model.name" /><br>
+    
+          <h6><b>Name your form</b></h6>
+          <input name="form-name" class="col-2-static-name" type="text" [(ngModel)]="model.name" id="form-name" /><br>
           <h6><b>Form description</b></h6>
-          <input name="form-description" class="col-2-static-description" type="text" [(ngModel)]="model.description" /><br>
+          <input name="form-description" class="col-2-static-description" type="text" [(ngModel)]="model.description" id="form-description" /><br>
           <h6><b>Date created</b></h6>
-          <input name="date-created" class="col-2-static-date" type="date" [(ngModel)]="model.date" /><br>
+          <input name="date-created" class="col-2-static-date" type="date" [(ngModel)]="model.date" id="form-date" /><br><br>
 
+      <div class="preview" id="preview">
+        <div class="dropzone">
           <section dndDropzone
                 (dndDragover)="onDragover($event)"
                 (dndDrop)="onDrop($event,model.attributes)" class="dndDropArea"
                 [ngClass]="{'empty':model.attributes.length == 0}"
                 [style.backgroundColor]="model.theme.bgColor"
                 [style.color]="model.theme.textColor">
+
+                <div class="drop-area-text" id="drop-area-text">
+                  <h5><b>ADD FIELDS HERE</b></h5>
+                  <h6>Drag and drop a field from side bar to add it in your form</h6>
+                </div>
+        
 
             <div class="field" *ngFor="let item of model.attributes;let i= index;" 
               [ngClass]="item.toggle ? 'form-group-2' : 'form-group-1'"
@@ -47,38 +61,71 @@
                 (dndMoved)="onDragged(item, model.attributes, 'move')"
                 [dndEffectAllowed]="'all'" 
                 [dndDraggable]="item">
-        
+                
                   <!--DROPZONE-->
-                  <div (click)="displayColumn3Text(text)" *ngIf="item.type=='text'" class = "dropped-element-text">
+                  <div *ngIf="item.type=='section'" class = "dropped-element-section">
                         <div class="drop-zone"><i (click)= "removeField(i,'text')" class="fa fa-ellipsis-v dndHandle" dndHandle></i>
+                            <input type="text" class="form-section" id="text-form-id" placeholder="Type section name here">
                         </div>
+                  </div>
+
+                  <div (click)="displayColumn3Text(text)" *ngIf="item.type=='text'" class = "dropped-element-text">
+                    <div class="drop-zone"><i (click)= "removeField(i,'text')" class="fa fa-ellipsis-v dndHandle" dndHandle></i>
                         <div id="text-form"><label>Text Label placeholder</label>
-                        </div> 
+                        </div>
+                        ---------------------------------------
                         <input type="text" class="form-control" id="text-form-id" placeholder="Value placeholder">
+                    </div>
                   </div>
 
                   <div (click)="displayColumn3Email(email)" *ngIf="item.type=='email'" class = "dropped-element-email">
                         <div class="drop-zone"><i (click)= "removeField(i,'email')" class="fa fa-ellipsis-v dndHandle" dndHandle></i>
+                            <div id="email-form"><label>Email Label placeholder</label>
+                            </div>
+                            --------------------------------------- 
+                            <input type="email" class="form-control" id="email-form-id" placeholder="Value placeholder">
                         </div>
-                        <div id="email-form"><label>Email Label placeholder</label>
-                        </div> 
-                        <input type="email" class="form-control" id="email-form-id" placeholder="Value placeholder">
                   </div>
               
                   <div (click)="displayColumn3Phone(phone)" *ngIf="item.type=='phone'" class = "dropped-element-phone">
                         <div class="drop-zone"><i (click)= "removeField(i,'phone')" class="fa fa-ellipsis-v dndHandle" dndHandle></i>
-                        </div>
-                        <div id="phone-form"><label>Phone Label placeholder</label>
-                        </div> 
-                        <input type="phone" class="form-control" id="phone-form-id" placeholder="Value placeholder">
+                            <div id="phone-form"><label>Phone Label placeholder</label>
+                            </div> 
+                            ---------------------------------------
+                            <input type="phone" class="form-control" id="phone-form-id" placeholder="Value placeholder">
+                      </div>
+                  </div>
+
+                  <div (click)="displayColumn3Logo(logo)" *ngIf="item.type=='logo'" class = "dropped-element-logo">
+                    <div class="drop-zone"><i (click)= "removeField(i,'phone')" class="fa fa-ellipsis-v dndHandle" dndHandle></i>
+                      <div id="logo-form">
+                        <img src="assets/stryker-logo.png" class="stryker-logo" alt="stryker-logo">
+                      </div>
+                    </div> 
+                  </div>
+
+                  <div (click)="displayColumn3Submit(submit)" *ngIf="item.type=='button'" class = "dropped-element-submit">
+                    <div class="drop-zone"><i (click)= "removeField(i,'phone')" class="fa fa-ellipsis-v dndHandle" dndHandle></i>
+                    </div>
+                    <div id="submit-form">
+                      <button class="submit-button" >submit</button>
+                    </div> 
                   </div>
 
                   <div (click)="displayColumn3Select(select)" *ngIf="item.type=='autocomplete'" class = "dropped-element-select">
                         <div class="drop-zone"><i (click)= "removeField(i,'select')" class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
                               <div id="select-form"><label>Select Label placeholder</label>
-                              </div> 
-                              <input type="text" class="form-control" id="select-form-id" placeholder="Value1 placeholder"> 
-                              <div class="dropdown">
+                              </div>
+                              --------------------------------------- 
+                              <div id="select-options">
+                                  <label>option 1:</label>&nbsp;
+                                  <label id="select-option1"></label><br>
+                                  <label>option 2:</label>&nbsp;
+                                  <label id="select-option2"></label><br>
+                              </div>
+
+                              
+                              <!-- <div class="dropdown">
                                     <select [(ngModel)]="selectedOptionLabel1" class="selectpicker" id="selectpickerId" 
                                         data-style="btn-success">
                                         <option value="" selected disabled>---Select---</option>
@@ -141,7 +188,7 @@
                                   <option>Chief / Director</option> 
                               </select>
                             </div>
-                          </div> 
+                          </div>  -->
 
                   </div>
           </div> 
@@ -150,13 +197,14 @@
           <div class="dndPlaceholder" dndPlaceholderRef>
           </div>
 
-        </section>       
+        </section>  
+      </div>     
     </div>
     <!--end of preview--->
-    <div class="btn-cont">
+    <!-- <div class="btn-cont">
       <button (click)="save()" class="save-button" >SAVE</button>
       <button class="view-forms" routerLink="/save-form">SAVED FORMS</button><br>
-    </div>
+    </div> -->
 
   </div>
   <!-- end of column-2 -->
@@ -171,20 +219,32 @@
               <button (click)="closeFunction('columnTextId-3')" type="button" class="close">
                 <span>x</span>
               </button>
-              <h6><b>Text</b></h6>
-              <h6><b>Required:</b></h6>
+              <h6><b>Text field options</b></h6>
+              <div class="check-box">
+                <!-- <input type="checkbox" id="required" name="vehicle1" value="Bike"> -->
+                <input type="checkbox" id="required">
+                <label for="option1">&nbsp;Required</label>&nbsp;&nbsp;
+                <input type="checkbox" id="section-end">
+                <label for="option2">&nbsp; Make this field as section end</label><br>
+                <input type="checkbox" id="validate-input">
+                <label for="option3">&nbsp;validate input with a specific format</label>&nbsp;<br>
+              </div>
+              <br>
+
+              <!-- <h6><b>Required:</b></h6>
               <input [(ngModel)]="result" type="radio" id="required-text-yes" value="yes">&nbsp;
               <label for="option1">Yes</label>&nbsp;
               <input [(ngModel)]="result" type="radio" id="required-text-no" value="no">&nbsp;
-              <label for="option2">No</label><br>
+              <label for="option2">No</label><br> -->
+
               <br><h6><b>Label:</b></h6>
-          <div class="dropdown">
-              <select [(ngModel)]="selectedOptionLabel" class="selectpicker" id="selectpickerId" 
-                    data-style="btn-success">
-                    <option value="" selected disabled>---Select---</option>
-                    <option *ngFor="let item1 of labelModels">{{item1.label}}</option>  
-              </select>
-          </div>
+              <div class="dropdown">
+                  <select [(ngModel)]="selectedOptionLabel" class="selectpicker" id="selectpickerId" 
+                        data-style="btn-success">
+                        <option value="" selected disabled>---Select---</option>
+                        <option *ngFor="let item1 of labelModels">{{item1.label}}</option>  
+                  </select>
+              </div>
 
           <br><h6><b>Value:</b></h6>
           <div class="dropdown">
@@ -198,8 +258,14 @@
           <div class="form-group">
             <br><h6><b>Regex:</b></h6>
             <!-- <input class="form-control" type="text" [(ngModel)]="item.regex" /> ---->
-            <input class="form-control" type="text"/>
+            <input class="form-control" type="text" placeholder="Dummy Regex"/>
+            <br><h6><b>Input Validation</b></h6>
+            <input class="form-control" type="text" placeholder="Dummy validation rule"/>
+            <br><h6><b>When the answer is invalid, display this error message</b></h6>
+            <input class="form-control" type="text" placeholder="Type error message here"/>
           </div>
+
+
       
           <div class="btn-cont">
             <button (click)="setLabel(selectedOptionLabel, selectedOptionName, result)" class="add-button">UPDATE</button>
@@ -298,12 +364,16 @@
           <span>x</span>
           </button>
     
-          <h6><b>Select</b></h6>
-          <h6><b>Required:</b></h6>
-          <input [(ngModel)]="result" type="radio" id="required-text-yes" value="yes">&nbsp;
-          <label for="option1">Yes</label>&nbsp;
-          <input [(ngModel)]="result" type="radio" id="required-text-no" value="no">&nbsp;
-          <label for="option2">No</label><br>
+          <h6><b>Select field options</b></h6>
+          <div class="check-box">
+            <!-- <input type="checkbox" id="required" name="vehicle1" value="Bike"> -->
+            <input type="checkbox" id="required">
+            <label for="option1">&nbsp;Required</label>&nbsp;&nbsp;
+            <input type="checkbox" id="section-end">
+            <label for="option2">&nbsp; Make this field as section end</label><br>
+          </div>
+          <br>
+
     
           <br><h6><b>Label:</b></h6>
           <div class="dropdown">
@@ -314,33 +384,59 @@
                 </select>
           </div>
   
-          <br><h6><b>Value:</b></h6>
+          <br><h6><b>Option 1</b></h6>
           <div class="dropdown">
-            <select [(ngModel)]="selectedOptionValue" class="selectpicker" id="selectpickerId" 
-                data-style="btn-success">
+            <select [(ngModel)]="option1">
                 <option value="" selected disabled>---Select---</option>
                   <option *ngFor="let item1 of selectValueModels">{{item1.value}}</option>  
             </select>
           </div>
+
+          <br><h6><b>Option 2</b></h6>
+          <div class="dropdown">
+            <select [(ngModel)]="option2">
+                <option value="" selected disabled>---Select---</option>
+                  <option *ngFor="let item1 of selectValueModels">{{item1.value}}</option>  
+            </select>
+          </div><br>
   
-          <div class="form-group">
-          <br><h6><b>Regex:</b></h6>
-          <input class="form-control" type="text"/>
-          </div>
+
   
           <div class="btn-cont">
-            <button (click)="setPhoneLabel(selectedOptionLabel, selectedOptionValue, result)" class="add-button">UPDATE</button>
+            <button (click)="setSelectLabel(selectedOptionLabel, option1, option2)" class="add-button">UPDATE</button>
+            <button class="add-options-button">ADD MORE OPTIONS</button><br>
+            <div class="conditional-logic" id="conditional-logic">
+                <button (click)="conditionalLogic()" class="add-conditonal-logic-button">ADD CONDITIONAL LOGIC</button><br>
+            </div>
+            <div class="conditional-logic-options" id="conditional-logic-options">
+              <br><h6><b>If selected</b></h6>
+                <div class="dropdown">
+                  <select [(ngModel)]="option1">
+                      <option value="" selected disabled>---Select---</option>
+                        <option *ngFor="let item1 of selectValueModels">{{item1.value}}</option>  
+                  </select>
+                </div> 
+                
+                <br><h6><b>Then display</b></h6>
+                <div class="dropdown">
+                  <select [(ngModel)]="option1">
+                      <option value="" selected disabled>---Select---</option>
+                        <option *ngFor="let item1 of selectValueModels">{{item1.value}}</option>  
+                  </select>
+                </div> 
+
+                <br><h6><b>Select field</b></h6>
+                <div class="dropdown">
+                  <select [(ngModel)]="option1">
+                      <option value="" selected disabled>---Select---</option>
+                        <option *ngFor="let item1 of selectValueModels">{{item1.value}}</option>  
+                  </select>
+                </div> 
+            </div>
+            
           </div>
 
       </div>
-
-  
-  
-  
   </div>
 
-
-
-
- 
 </div>

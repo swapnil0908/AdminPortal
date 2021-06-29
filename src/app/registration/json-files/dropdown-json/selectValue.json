@@ -1,17 +1,9 @@
 [
     {
-      "value": "Select-value-1",
-      "regex" : ""
+      "value": "Healthcare Professional"
       },
     {
       
-    "value": "Select-value-2",
-    "regex" : "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)([a-zA-Z]{2,5})$"
-    },
-  
-    {
-      
-    "value": "Select-value-3",
-    "regex" : "^[+]?[(]?[0-9]{3}[)]?[-]?[0-9]{3}[]?[0-9]{4,6}$"
+    "value": "Dealer"
     }
   ]

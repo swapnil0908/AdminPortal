@@ -15,9 +15,14 @@ import * as phoneValueData from './json-files/phone-json/phoneValue.json';
 
 import * as selectLabelData from './json-files/dropdown-json/selectLabel.json';
 import * as selectValueData from './json-files/dropdown-json/selectValue.json';
+
+import * as staticTitleData from './json-files/static.json';
+
 import { $, element } from 'protractor';
 import { style } from '@angular/animations';
 import Swal from 'sweetalert2/dist/sweetalert2.all.min.js';
+import { saveAs } from 'file-saver';
+
 
 
 @Component({
@@ -40,8 +45,9 @@ export class RegistrationComponent implements OnInit {
   selectedOptionLabel: string;
   selectedOptionValue: string;
   selectedOptionName: string;
+  option1: string;
+  option2: string;
 
- 
 
 //For the purpose of localization we are storing all the menu items, corresponding labels and values in separate json files.
 
@@ -64,9 +70,10 @@ public phoneLabel: any = (phoneLabelData as any).default;
 public selectValue: any = (selectValueData as any).default;
 public selectLabel: any = (selectLabelData as any).default;
 
+public staticTitle: any = (staticTitleData as any).default;
+
 
 //Array objects for labels and names
-
 
 //array for text data
 labelModels:Array<field>=this.labels;
@@ -157,10 +164,16 @@ onDrop( event:DndDropEvent, list?:any[] ) {
     list.splice( index, 0, event.data );
   }
 
+
+  // console.log(JSON.stringify(this.fieldModels[0]['column-1'][0]));
+  //fieldModels[0] -> item
+
 //code to display div on drop event
 
 
 //add transition effect
+var area = document.getElementById('drop-area-text');
+area.style.display = "none";
 var col2 = document.getElementById('column-2');
 col2.style.width = "43%";
 col2.style.transition = "1s";
@@ -210,6 +223,18 @@ col2.style.display = "block";
     x.style.display = "block";
 
   }
+
+
+  else if(event.data.label === "Submit"){
+    var x = document.getElementById("columnSelectId-3");
+    this.hideOtherDivs(x);
+    x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
+    x.style.transition = "1s";
+    x.style.padding = "5%";
+    x.style.display = "block";
+  }
+
+
 }
 
 // addValue(values){
@@ -235,15 +260,15 @@ removeField(i,type){
         var col3 = document.getElementById('columnTextId-3');
         col3.style.display = "none";
       }
-      if(type === 'email'){
+    else if(type === 'email'){
         var col3 = document.getElementById('columnEmailId-3');
         col3.style.display = "none";
       }
-      if(type === 'phone'){
+    else if(type === 'phone'){
         var col3 = document.getElementById('columnPhoneId-3');
         col3.style.display = "none";
       }
-      if(type === 'select'){
+    else if(type === 'select'){
         var col3 = document.getElementById('columnSelectId-3');
         col3.style.display = "none";
       }
@@ -284,8 +309,13 @@ updateForm(){
 setLabel(x,y,required){
   var l = document.getElementById("text-form");
   l.textContent = x;
+  l.style.fontSize = "small";
+  l.style.marginLeft = "10px";
+
   var n = document.getElementById("text-form-id")
   n.setAttribute('value', y);
+  n.style.fontSize = "small";
+
   if(required === "yes")
   document.getElementById("text-form").append("*");
 }
@@ -310,6 +340,17 @@ setPhoneLabel(x,y,required){
   document.getElementById("phone-form").append("*");
 }
 
+setSelectLabel(x,y,z){
+  var l = document.getElementById("select-form");
+  l.textContent = x;
+  l.style.fontSize = "small";
+  var a = document.getElementById("select-option1");
+  var b = document.getElementById("select-option2");
+  a.textContent = y;
+  b.textContent = z;
+
+}
+
 edit(){
   var my_div = document.getElementById('preview-test');
   my_div.style.display = "none";
@@ -322,14 +363,11 @@ edit(){
 //preview the form.
 preview(){
   //logic to toggle preview popup
-  console.log("preview button");
   var col2 = document.getElementById('column-2');
   col2.style.display = "none";
   //if the new div is created then check if dsiplay is none or block and toggle.
   if(document.getElementById('new_div') != null){
-   // if(document.getElementById('new_div').style.display === "none"){
           document.getElementById('preview-test').style.display = "block";
-    //      document.getElementById('new_div').style.display = "block";
           document.getElementById('new_div').style.margin = "2%";
           document.getElementById('new_div').style.padding = "2%";
           document.getElementById('new_div').style.marginTop = "2%";
@@ -337,11 +375,9 @@ preview(){
           document.getElementById('new_div').style.height = "auto%";
           document.getElementById('new_div').style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
           document.getElementById('new_div').style.transition = "width height 2s";
-  //  }
-   /* else if(document.getElementById('new_div').style.display === "block"){
-          document.getElementById('new_div').style.display = "none";
-          document.getElementById('preview-test').style.display = "none";
-    }*/
+          // var input = (<HTMLInputElement>document.getElementById("form-description")).value;
+          // var element = document.getElementById("form-description");
+          // element.setAttribute("value", input);
   }
 }
 
@@ -379,6 +415,8 @@ save(){
       var json2html = require('html2json').json2html;
       var json =  html2json(elements.innerHTML);
       var theJSON = JSON.stringify(json);
+      // const blob = new Blob([JSON.stringify(theJSON)], {type : 'application/json'});
+      // saveAs(blob, 'abc.json');   
       //console.log(theJSON);
       var html = json2html(json);
       var old_div = document.getElementById('preview-test');
@@ -471,6 +509,18 @@ closeFunction(id){
   var col2 = document.getElementById('column-2');
   col2.style.width = "75%";
   col2.style.transition = "1s";
+}
+
+getKeys(obj){
+  return Object.keys(obj)
+}
+
+conditionalLogic(){
+  var x = document.getElementById('conditional-logic');
+  x.style.display = "none";
+
+  document.getElementById('conditional-logic-options').style.display = "block";
+
 }
 
 // //note sure what this is used for??

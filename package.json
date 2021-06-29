@@ -23,6 +23,7 @@
     "@toverux/ngx-sweetalert2": "3.4.0",
     "bootstrap": "^5.0.2",
     "core-js": "^3.15.1",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "html2json": "^1.0.2",
     "htmlstr-parser": "^2.0.1",
