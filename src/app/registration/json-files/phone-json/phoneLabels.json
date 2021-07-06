@@ -1,11 +1,8 @@
 [
     {
-     "label": "Phone-label-1"
+     "label": "Mobile Phone"
      },
    {
-     "label": "Phone-label-2"
-   },
-   {
-     "label": "Phone-label-3"
+     "label": "Organization Phone"
    }
  ]

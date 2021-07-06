@@ -30,48 +30,27 @@
           </div>
           <div class="right">
             <label>Marketing Application Category</label><br>
-            <!--<div class="dropdown">
-              <button (click)="dropDownFunction(1)" class="dropbtn">---Select---</button>
-              <div id="myDropdown-1" class="dropdown-content">
-                  <a>Medical education content</a>
-                  <a>Product information content</a>
-                  <a>Category 3</a>
-              </div>
-            </div>-->
-            
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle custom-button"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >Medical education content</a>
-                <a class="dropdown-item" >Product information content</a>
-                <a class="dropdown-item" >Category 3</a>
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+                      <option value="" selected disabled>---Select---</option>
+                      <option>Medical education content</option>
+                      <option>Product information content</option>
+                      <option>Category 3</option>
+            </select>
           </div>
         </div>
+        <br>
+        <br>
         
         <!-----------------------Row 2------------------------->
         <div class="row2">
           <div class="left">
             <label>App risk level</label><br>
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >Low</a>
-                <a class="dropdown-item" >Medium</a>
-                <a class="dropdown-item" >High</a>
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+                  <option value="" selected disabled>---Select---</option>
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+            </select>
           </div>
         
           <div class="right">
@@ -82,6 +61,8 @@
           </div>
 
         </div>
+        <br>
+        <br>
 
       <!-----------------------Row 3------------------------->
 
@@ -91,135 +72,101 @@
           <input type="text" class="form-control" id="formGroupExampleInput" >
         </div>
       </div>
+      <br>
+      <br>
+
 
       <!-----------------------Row 4------------------------->
         
       <div class="row3">
         <div class="left">
             <label>Content hosting platform</label><br>
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >AEM</a>
-                <a class="dropdown-item" >Category-2</a>
-                <a class="dropdown-item" >Category-3</a>
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+                  <option value="" selected disabled>---Select---</option>
+                  <option>AEM</option>
+                  <option>Category-2</option>
+                  <option>Category-3</option>
+            </select>
           </div>
 
 
           <div class="right">
             <label>Shareable via social media?</label><br>
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >Yes</a>
-                <a class="dropdown-item" >No</a>
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+                  <option value="" selected disabled>---Select---</option>
+                  <option>Yes</option>
+                  <option>No</option>
+            </select>
           </div>
-      </div>
+        </div>
+        <br>
+        <br>
 
       <!-----------------------Row 5------------------------->
 
     <div class="left">
       <label>Primary country regions for which app access is allowed</label><br>
-      <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ---Select---
-        </a>
-      
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" >APAC</a>
-          <a class="dropdown-item" >East Asia</a>
-          <a class="dropdown-item" >Japan</a>
-          <a class="dropdown-item" >SSP</a>
-
-        </div>
-      </div>
-        <br>
-        <br>
+        <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+              <option value="" selected disabled>---Select---</option>
+              <option>APAC</option>
+              <option>East Asia</option>
+              <option>Japan</option>
+              <option>SSP</option>
+        </select>
     </div>
+    <br>
 
     <div class="left">
-
-        <div class="form-group">
-          <label for="formGroupExampleInput">Support contact information for primary country regions</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" >
-        </div>
-
-
-        <label>Secondary country regions for which app access is allowed</label><br>
-      <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ---Select---
-        </a>
-      
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" >APAC</a>
-          <a class="dropdown-item" >East Asia</a>
-          <a class="dropdown-item" >Japan</a>
-          <a class="dropdown-item" >SSP</a>
-
-        </div>
-      </div>
-        <br>
-        <br>
+      <div class="form-group">
+        <label for="formGroupExampleInput">Support contact information for primary country regions</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" >
     </div>
+    <br>
 
-      <div class="left">
-        <div class="form-group">
-          <label for="formGroupExampleInput">Support contact information for secondary country regions</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" >
-        </div>
+
+
+    <label>Secondary country regions for which app access is allowed</label><br>
+    <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+            <option value="" selected disabled>---Select---</option>
+            <option>APAC</option>
+            <option>East Asia</option>
+            <option>Japan</option>
+            <option>SSP</option>
+    </select>
+    <br>
+    <br>
+
+    <div class="left">
+      <div class="form-group">
+        <label for="formGroupExampleInput">Support contact information for secondary country regions</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" >
       </div>
+    </div>
+    <br>
 
       <!------------------Row 6--------->
       <div class="row4">
           <div class="left">
             <label>Target Audience</label><br>
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >HCPs</a>
-                <a class="dropdown-item" >Dealers</a>
-                <a class="dropdown-item" >Non HCP Businesses</a>
-                <a class="dropdown-item" >General public</a>
-      
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+                <option value="" selected disabled>---Select---</option>
+                <option>HCPs</option>
+                <option>Dealers</option>
+                <option>Non HCP Businesses</option>
+                <option>General public</option>
+            </select>
           </div>
           <div class="right">
             <label>Access Pattern</label><br>
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >Automatic</a>
-                <a class="dropdown-item" >Manual</a>
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+              <option value="" selected disabled>---Select---</option>
+              <option>Automatic</option>
+              <option>Manual</option>
+          </select>
           </div>
         </div>
+        <br>
+        <br>
 
         <!-------Row 7----->
 
@@ -227,86 +174,62 @@
         <div class="row5">
         <div class="left">
             <label>App request policy</label><br>
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >Self-service</a>
-                <a class="dropdown-item" >Self-service provider</a>
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+              <option value="" selected disabled>---Select---</option>
+              <option>Self-service</option>
+              <option>Self-service provider</option>
+            </select>
         </div>
         <div class="right">
             <label>Rules for non HCPs</label><br>
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ---Select---
-              </a>
-            
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" >Open</a>
-                <a class="dropdown-item" >Restricted</a>
-              </div>
-            </div>
-            <br>
-            <br>
+            <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+              <option value="" selected disabled>---Select---</option>
+              <option>Open</option>
+              <option>Restricted</option>
+            </select>
         </div>
       </div>
+      <br>
+      <br>
 
     <!-------Row 8------->
 
     <div class="row6">
       <div class="left">
         <label>Access Policy for Non-EEMEA/US residents</label><br>
-        <div class="dropdown show">
-          <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ---Select---
-          </a>
-        
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" >Self-service</a>
-            <a class="dropdown-item" >Self-service provider</a>
-          </div>
-        </div>
-        <br>
-        <br>
+        <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+          <option value="" selected disabled>---Select---</option>
+          <option>Self-service</option>
+          <option>Self-service provider</option>
+        </select>
       </div>
 
       <!---OpenRequires ApprovalDenied---->
       <div class="right">
         <label>Rules for Stryker Employees</label><br>
-        <div class="dropdown show">
-          <a class="btn btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ---Select---
-          </a>
-        
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" >Open</a>
-            <a class="dropdown-item" >Requires approval</a>
-            <a class="dropdown-item" >Denied</a>
-          </div>
-        </div>
-        <br>
-        <br>
+        <select class="selectpicker" id="selectpickerId" data-style="btn-success">
+          <option value="" selected disabled>---Select---</option>
+          <option>Open</option>
+          <option>Requires Approval</option>
+          <option>Denied</option>
+        </select>
       </div>
-        </div>
+    </div>
+    <br>
+    <br>
 
-      <div class="left">
-        <div class="form-group">
-          <label for="formGroupExampleInput">Blocked domains</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" >
-        </div>
+    <div class="left">
+      <div class="form-group">
+        <label for="formGroupExampleInput">Blocked domains</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" >
       </div>
+    </div>
 
-      <br>
-      <div class="btn-cnt">
-          <button (click)="myFunction()" class="save-button">SAVE</button>
-      </div>
-      <br>
+    <br>
+    <div class="btn-cnt">
+        <button (click)="myFunction()" class="save-button">SAVE</button>
+    </div>
+    <br>
 
   </div>
 

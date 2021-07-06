@@ -1,11 +1,5 @@
 [
     {
-     "label": "Email-label-1"
-     },
-   {
-     "label": "Email-label-2"
-   },
-   {
-     "label": "Email-label-3"
-   }
+     "label": "Email"
+     }
  ]

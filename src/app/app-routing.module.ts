@@ -6,6 +6,8 @@ import { AppCreationComponent } from './app-creation/app-creation.component';
 import {AppOnboardingComponent} from './app-onboarding/app-onboarding.component';
 import { RegistrationComponent } from './registration/registration.component';
 import {SaveFormComponent} from './save-form/save-form.component';
+import {UserRegistrationComponent} from './user-registration/user-registration.component';
+//import {RootComponent} from './user-registration/user-registration.component';
 
 const routes: Routes = [{ path: 'dashboard', component: DashboardComponent },
 { path: 'app-onboarding', component: AppOnboardingComponent },
@@ -13,6 +15,7 @@ const routes: Routes = [{ path: 'dashboard', component: DashboardComponent },
 { path: 'registration', component: RegistrationComponent },
 { path: 'app-creation', component: AppCreationComponent },
 {path: 'save-form', component: SaveFormComponent},
+{path: 'user-registration', component: UserRegistrationComponent},
 { path: '', redirectTo: 'registration', pathMatch: 'full' }];
 
 @NgModule({

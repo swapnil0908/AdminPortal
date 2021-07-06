@@ -1,11 +1,27 @@
 [
+  {
+    "label": "I am a"
+    },
     {
-     "label": "Select-label-1"
+     "label": "Personal User Group - 1"
      },
    {
-     "label": "Select-label-2"
+     "label": "Personal User Group - 2"
    },
    {
-     "label": "Select-label-3"
-   }
+     "label": "Personal User Group - 3"
+   },
+   {
+    "label": "Personal User Group - 4"
+  },
+  {
+    "label": "HCP Speciality sub speciality 1"
+  },
+  {
+    "label": "HCP Speciality sub speciality 2"
+  },
+  {
+    "label": "HCP Speciality sub speciality 3"
+  }
+
  ]

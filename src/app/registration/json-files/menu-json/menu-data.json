@@ -1,8 +1,10 @@
 [   
                   {
                     "type": "section",
-                    "icon": "",
-                    "label": "Form section",
+                    "optionsTitle": "SECTION FIELD OPTIONS",
+                    "icon": "fa-paragraph",
+                    "label": "Section",
+                    "divId":"section-Id",
                     "description": "Type section name here",
                     "placeholder": "Type section name here",
                     "className": "form-control",
@@ -12,8 +14,10 @@
                   },
                   {
                   "type": "text",
+                  "optionsTitle": "TEXT FIELD OPTIONS",
                   "icon": "fa-font",
                   "label": "Text",
+                  "divId":"text-Id",
                   "description": "Enter your text",
                   "placeholder": "Enter your text",
                   "className": "form-control",
@@ -24,9 +28,11 @@
                 {
 
                   "type": "email",
+                  "optionsTitle": "EMAIL FIELD OPTIONS",
                   "icon": "fa-envelope",
                   "required": true,
                   "label": "Email",
+                  "divId":"email-Id",
                   "description": "Enter your email",
                   "placeholder": "Enter your email",
                   "className": "form-control",
@@ -37,8 +43,10 @@
                 },
                 {
                   "type": "phone",
+                  "optionsTitle": "PHONE FIELD OPTIONS",
                   "icon": "fa-phone",
                   "label": "Phone",
+                  "divId":"phone-Id",
                   "description": "Enter your phone",
                   "placeholder": "Enter your phone",
                   "className": "form-control",
@@ -49,17 +57,45 @@
                 },
                 {
                   "type": "date",
+                  "optionsTitle": "DATE FIELD OPTIONS",
                   "icon":"fa-calendar",
                   "label": "Date",
+                  "divId":"date-Id",
                   "placeholder": "Date",
                   "className": "form-control"
                 },
                 {
-                  "type": "autocomplete",
+                  "type": "select",
+                  "optionsTitle": "SELECT FIELD OPTIONS",
                   "icon":"fa-bars",
                   "label": "Select",
+                  "divId":"select-Id",
                   "description": "Select",
                   "placeholder": "Select",
+                  "className": "form-control",
+                  "values": [
+                    {
+                      "label": "Option 1",
+                      "value": "option-1"
+                    },
+                    {
+                      "label": "Option 2",
+                      "value": "option-2"
+                    },
+                    {
+                      "label": "Option 3",
+                      "value": "option-3"
+                    }
+                  ]
+                },
+                {
+                  "type": "multiselect",
+                  "optionsTitle": "MULTI-SELECT FIELD OPTIONS",
+                  "icon":"fa-bars",
+                  "label": "MultiSelect",
+                  "divId":"multiselect-Id",
+                  "description": "Multi-Select",
+                  "placeholder": "Muti-Select",
                   "className": "form-control",
                   "values": [
                     {
@@ -80,6 +116,7 @@
                   "type": "logo",
                   "icon":"fa-image",
                   "label": "Logo",
+                  "divId":"logo-Id",
                   "className": "form-control",
                   "subtype": "file"
                 },
@@ -87,7 +124,22 @@
                   "type": "button",
                   "icon":"fa-paper-plane",
                   "subtype": "submit",
-                  "label": "Submit"
+                  "label": "Submit",
+                  "divId":"button-Id"
+                },
+                {
+                  "type": "privacy",
+                  "optionsTitle": "PRIVACY AND CONSENT FIELD OPTIONS",
+                  "icon":"fa-user-secret",
+                  "label": "Privacy and consent",
+                  "divId":"privacy-Id",
+                  "privacyStatement": "Enter your privacy statement"
+                
+                },{
+                  "type": "captcha",
+                  "icon": "fa-user",
+                  "label": "Captcha",
+                  "divId":"captcha-Id"
                 }
           
 ]

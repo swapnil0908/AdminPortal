@@ -1,17 +1,7 @@
 [
     {
-      "value": "Email-value-1",
-      "regex" : ""
-      },
-    {
-      
-    "value": "Email-value-2",
-    "regex" : "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)([a-zA-Z]{2,5})$"
-    },
+      "value": "email",
+      "regex" : "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)([a-zA-Z]{2,5})$"
+      }
+]
   
-    {
-      
-    "value": "Email-value-3",
-    "regex" : "^[+]?[(]?[0-9]{3}[)]?[-]?[0-9]{3}[]?[0-9]{4,6}$"
-    }
-  ]

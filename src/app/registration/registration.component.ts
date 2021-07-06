@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { DndDropEvent,DropEffect} from 'ngx-drag-drop';
 import { field, value } from '../global.model';
 import { ActivatedRoute } from '@angular/router';
@@ -16,17 +16,29 @@ import * as phoneValueData from './json-files/phone-json/phoneValue.json';
 import * as selectLabelData from './json-files/dropdown-json/selectLabel.json';
 import * as selectValueData from './json-files/dropdown-json/selectValue.json';
 
+import * as sectionId from './json-files/section-json/sectionID.json';
+import * as sectionLabel from './json-files/section-json/sectionLabel.json';
+
+import * as dateID from './json-files/date-json/dateId.json';
+import * as dateLabel from './json-files/date-json/dateLabel.json';
+
 import * as staticTitleData from './json-files/static.json';
+
 
 import { $, element } from 'protractor';
 import { style } from '@angular/animations';
 import Swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 import { saveAs } from 'file-saver';
+import { RecaptchaModule } from "ng-recaptcha";
+
+
+
+
 
 
 
 @Component({
-  selector: 'app-edit-app',
+  selector: 'registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
@@ -34,6 +46,15 @@ import { saveAs } from 'file-saver';
 
 
 export class RegistrationComponent implements OnInit {
+
+  constructor(private renderer: Renderer2){
+
+  }
+
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
 
   value:value={
     label:"",
@@ -47,6 +68,10 @@ export class RegistrationComponent implements OnInit {
   selectedOptionName: string;
   option1: string;
   option2: string;
+  logicOption1: string;
+  logicOption2: string;
+  logicOption3: string;
+  
 
 
 //For the purpose of localization we are storing all the menu items, corresponding labels and values in separate json files.
@@ -72,6 +97,12 @@ public selectLabel: any = (selectLabelData as any).default;
 
 public staticTitle: any = (staticTitleData as any).default;
 
+public sectionId: any = (sectionId as any).default;
+public sectionLabel: any = (sectionLabel as any).default;
+
+
+public dateId: any = (dateID as any).default;
+public dateLable: any = (dateLabel as any).default;
 
 //Array objects for labels and names
 
@@ -94,6 +125,12 @@ selectLabelModels:Array<field>=this.selectLabel;
 //array for menu data
 fieldModels:Array<field>= this.data;
 
+sectionIdModels:Array<field>=this.sectionId;
+sectionLabelModels:Array<field>=this.sectionLabel;
+
+dateIdModels:Array<field>=this.dateId;
+dateLabelModels:Array<field>=this.dateLable;
+
 //array for form name, description and date
 modelFields:Array<field>=[];
 model:any = {
@@ -111,16 +148,18 @@ model:any = {
 report = false;
 reports:any = [];
 
-constructor(
-  private route:ActivatedRoute
-) { }
 
-ngOnInit() {
+
+ngOnInit(): void {
+
+let script = this.renderer.createElement('script');
+script.defer = true;
+script.sync = true;
+script.rc = "https://www.google.com/recaptcha/api.js";
+this.renderer.appendChild(document.body, script);
+
 
 }
-
-
-
 
 onDragStart(event:DragEvent) {
   console.log("drag started", JSON.stringify(event, null, 2));
@@ -154,86 +193,24 @@ onDragover(event:DragEvent) {
 }
 
 onDrop( event:DndDropEvent, list?:any[] ) {
+  
+  let index = event.index;
   if( list && (event.dropEffect === "copy" || event.dropEffect === "move") ) {
-    if(event.dropEffect === "copy")
+    if(event.dropEffect === "copy"){
     event.data.name = event.data.type+'-'+new Date().getTime();
-    let index = event.index;
+    }
+    
     if( typeof index === "undefined" ) {
       index = list.length;
     }
-    list.splice( index, 0, event.data );
+    list.splice(   index, 0, event.data );
   }
 
+  let dropArea = document.getElementById('drop-area-text');
+  dropArea.style.display = "none";
 
-  // console.log(JSON.stringify(this.fieldModels[0]['column-1'][0]));
-  //fieldModels[0] -> item
-
-//code to display div on drop event
-
-
-//add transition effect
-var area = document.getElementById('drop-area-text');
-area.style.display = "none";
-var col2 = document.getElementById('column-2');
-col2.style.width = "43%";
-col2.style.transition = "1s";
-
-var col2 = document.getElementById('columnId-3')
-col2.style.display = "block";
-
-
-//if the dropped label is 'text' - hide all other divs in column-3 and display menu for text in column 3
-  if(event.data.label === "Text"){
-    var x = document.getElementById('columnTextId-3');
-    this.hideOtherDivs(x);
-    x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "1s";
-    x.style.padding = "5%";
-    x.style.display = "block";  
-  }
-
-  //if the dropped label is 'email' - hide all other divs in column-3 and display menu for email in column 3
-  else if(event.data.label === "Email"){
-    var x = document.getElementById("columnEmailId-3");
-    this.hideOtherDivs(x);
-    x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "1s";
-    x.style.padding = "5%";
-    x.style.display = "block"
-  }
-
-  //if the dropped label is 'phone' - hide all other divs in column-3 and display menu for phone in column 3
-  else if(event.data.label === "Phone"){
-    var x = document.getElementById("columnPhoneId-3");
-    this.hideOtherDivs(x);
-    x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "1s";
-    x.style.padding = "5%";
-    x.style.display = "block";
-
-  }
-
-  //if the dropped label is 'select menu' - hide all other divs in column-3 and display menu for select menu in column 3
-  else if(event.data.label === "Select"){
-    var x = document.getElementById("columnSelectId-3");
-    this.hideOtherDivs(x);
-    x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "1s";
-    x.style.padding = "5%";
-    x.style.display = "block";
-
-  }
-
-
-  else if(event.data.label === "Submit"){
-    var x = document.getElementById("columnSelectId-3");
-    this.hideOtherDivs(x);
-    x.style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-    x.style.transition = "1s";
-    x.style.padding = "5%";
-    x.style.display = "block";
-  }
-
+  let id = event.data.divId + index;
+  this.hideOtherDivs(id);
 
 }
 
@@ -276,6 +253,7 @@ removeField(i,type){
   });
 }
 
+
 /* no need
 updateForm(){
   let input = new FormData;
@@ -313,8 +291,8 @@ setLabel(x,y,required){
   l.style.marginLeft = "10px";
 
   var n = document.getElementById("text-form-id")
-  n.setAttribute('value', y);
-  n.style.fontSize = "small";
+  n.setAttribute('id', y);
+  
 
   if(required === "yes")
   document.getElementById("text-form").append("*");
@@ -324,8 +302,9 @@ setLabel(x,y,required){
 setEmailLabel(x,y,required){
   var l = document.getElementById("email-form");
   l.textContent = x;
+  l.style.fontSize = "small";
   var n = document.getElementById("email-form-id")
-  n.setAttribute('value', y);
+  n.setAttribute('id', y);
   if(required === "yes")
   document.getElementById("email-form").append("*");
 }
@@ -334,29 +313,31 @@ setEmailLabel(x,y,required){
 setPhoneLabel(x,y,required){
   var l = document.getElementById("phone-form");
   l.textContent = x;
+  l.style.fontSize = "small";
   var n = document.getElementById("phone-form-id")
-  n.setAttribute('value', y);
+  n.setAttribute('id', y);
   if(required === "yes")
   document.getElementById("phone-form").append("*");
 }
 
-setSelectLabel(x,y,z){
+setSelectLabel(x,y){
   var l = document.getElementById("select-form");
   l.textContent = x;
   l.style.fontSize = "small";
   var a = document.getElementById("select-option1");
-  var b = document.getElementById("select-option2");
-  a.textContent = y;
-  b.textContent = z;
-
+  var b = document.getElementById("option1");
+  a = b;
 }
 
 edit(){
-  var my_div = document.getElementById('preview-test');
-  my_div.style.display = "none";
+  // var my_div = document.getElementById('preview');
+  // my_div.style.display = "none";
 
+  var preview = document.getElementById('preview-1');
+  preview.style.display = "none";
   var col2 = document.getElementById('column-2');
-  col2.style.display = "block";
+  col2.style.display = "block"
+  col2.style.width = "500%";
 
 }
 
@@ -365,149 +346,101 @@ preview(){
   //logic to toggle preview popup
   var col2 = document.getElementById('column-2');
   col2.style.display = "none";
+
   //if the new div is created then check if dsiplay is none or block and toggle.
-  if(document.getElementById('new_div') != null){
-          document.getElementById('preview-test').style.display = "block";
-          document.getElementById('new_div').style.margin = "2%";
-          document.getElementById('new_div').style.padding = "2%";
-          document.getElementById('new_div').style.marginTop = "2%";
-          document.getElementById('new_div').style.width = "43%";
-          document.getElementById('new_div').style.height = "auto%";
-          document.getElementById('new_div').style.boxShadow = "0 4px 8px 0 rgba(0,0,0,0.2)";
-          document.getElementById('new_div').style.transition = "width height 2s";
-          // var input = (<HTMLInputElement>document.getElementById("form-description")).value;
-          // var element = document.getElementById("form-description");
-          // element.setAttribute("value", input);
+  if(document.getElementById('preview-1') != null){
+          document.getElementById('preview-1').style.display = "block";
   }
 }
 
 //function to get preview div and convert it to json and html
 save(){
-  console.log("form saved");
-  //if new div has already been created then update it
-  if(document.getElementById('new_div') != null){
-      //extract div element of which need json
-      var elements = document.getElementById("preview");
-      //npm install html2json
-      //import html2json library
-      var html2json = require('html2json').html2json;
-      //import json2html library
-      var json2html = require('html2json').json2html;
+  
 
-      //get json of div element
-      var json =  html2json(elements.innerHTML);
-
-      //stringify the json
-      var theJSON = JSON.stringify(json);
-      //console.log(theJSON);
-      
-    
-      //console.log(save_data[0]);
-
-      //get html of that json
-      var html = json2html(json);
-      document.getElementById('new_div').innerHTML = html;
-  }
-  //else if first time clicking save create new div and append.
-  else{
-      var elements = document.getElementById("preview");
+      var elements = document.getElementById("preview-1"); // preview-enter data manually
       var html2json = require('html2json').html2json;
       var json2html = require('html2json').json2html;
       var json =  html2json(elements.innerHTML);
       var theJSON = JSON.stringify(json);
-      // const blob = new Blob([JSON.stringify(theJSON)], {type : 'application/json'});
-      // saveAs(blob, 'abc.json');   
+      const blob = new Blob([JSON.stringify(theJSON)], {type : 'application/json'});
+      saveAs(blob, 'test1.json');   
       //console.log(theJSON);
-      var html = json2html(json);
-      var old_div = document.getElementById('preview-test');
-      var new_div = document.createElement('div');
-      new_div.id = 'new_div';
-      new_div.style.display = "block";
-      new_div.style.width = "80%";
-      new_div.style.width = "80%";
-      new_div.innerHTML = html;
-      old_div.appendChild(new_div);
-      
-  }
 
 }
 
 
-// //!!!!function to write saved data to a file - need to work on this
-
-// /*
-// outputJSONfile(data){
-  
-//   const fs = require('fs');
-//   fs.writeFile("output.json", data, 'utf8', function (err) {
-//     if (err) {
-//         console.log("An error occured while writing JSON Object to File.");
-//         return console.log(err);
-//     }
-  
-//     console.log("JSON file has been saved.");
-// });
-// }*/
-
-
-
 //function to hide all other divs when a label is dropped and clicked on  
-hideOtherDivs(div){
-  var Divs = ['columnTextId-3', 'columnEmailId-3','columnPhoneId-3','columnSelectId-3'];
-  //var Divs = ['columnTextId-3'];
-  for(var i=0;i<Divs.length;i++){
-    if(div != document.getElementById(Divs[i])){
-      document.getElementById(Divs[i]).style.display = "none";
+hideOtherDivs(id){
+    var list = document.querySelectorAll('[id*="-Id"]');
+    for(var i=0;i<list.length;i++){
+      console.log(list[i].id);
+      if(id != list[i].id){
+        document.getElementById(list[i].id).style.display = "none";
+        document.getElementById(list[i].id).parentElement.style.display = "none";
+      }
     }
-  }
 }
 
 column2Transition(){
   var col2 = document.getElementById('column-2');
-  col2.style.width = "43%";
+  col2.style.width = "70%";
   col2.style.transition = "1s";
 
 }
 
-//diplay column 3 for text item on click
-displayColumn3Text() {
-  var x = document.getElementById("columnTextId-3");
-  this.hideOtherDivs(x)
-  this.column2Transition();
-  x.style.display = "block";
-}
-
-//diplay column 3 for email item on click
-displayColumn3Email() {
-  var x = document.getElementById("columnEmailId-3");
-  this.hideOtherDivs(x);
-  this.column2Transition();
-  x.style.display = "block";
-}
-
-//diplay column 3 for phone item on click
-displayColumn3Phone() {
-  var x = document.getElementById("columnPhoneId-3");
-  this.hideOtherDivs(x);
-  this.column2Transition();
-  x.style.display = "block";
-}
-
 //diplay column 3 for select item on click
-displayColumn3Select(){
-  var x = document.getElementById("columnSelectId-3");
-  this.hideOtherDivs(x)
-  this.column2Transition();
+displaySection(i){
+  var x = document.getElementById('section-Id' + i);
+  this.hideOtherDivs(x.id)
+  x.parentElement.style.display = "block";
+  x.style.display = "block";
+}
+
+displayText(i){
+  var x = document.getElementById('text-Id' + i);
+  this.hideOtherDivs(x.id)
+  x.parentElement.style.display = "block";
+  x.style.display = "block";
+}
+
+displayEmail(i){
+  var x = document.getElementById('email-Id' + i);
+  this.hideOtherDivs(x.id);
+  x.parentElement.style.display = "block";
+  x.style.display = "block";
+}
+
+displayPhone(i){
+  var x = document.getElementById('phone-Id' + i);
+  this.hideOtherDivs(x.id)
+  x.parentElement.style.display = "block";
+  x.style.display = "block";
+}
+
+
+displayDate(i){
+  var x = document.getElementById('date-Id' + i);
+  this.hideOtherDivs(x.id)
+  x.parentElement.style.display = "block";
+  x.style.display = "block";
+}
+
+displaySelect(i){
+  var x = document.getElementById('select-Id' + i);
+  this.hideOtherDivs(x.id)
+  x.parentElement.style.display = "block";
   x.style.display = "block";
 }
   
 //function to close the column-3 popup
 closeFunction(id){
+  //console.log(id);
   var x = document.getElementById(id);
   x.style.display = "none";
+  x.parentElement.style.display = "none";
 
   var col2 = document.getElementById('column-2');
-  col2.style.width = "75%";
+  col2.style.width = "80%";
   col2.style.transition = "1s";
 }
 

@@ -13,11 +13,16 @@ import { AppOnboardingComponent } from './app-onboarding/app-onboarding.componen
 import { WorkflowComponent } from './workflow/workflow.component';
 import { AppCreationComponent } from './app-creation/app-creation.component';
 import { SaveFormComponent } from './save-form/save-form.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CaptchaComponent } from './captcha/captcha.component';
+import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
+
 
 
 
 //TABLE FOR ANGULAR
-//import { MatTableModule} from '@angular/material/table';
 
 const appRoutes: Routes = [
   { path: '', component: RegistrationComponent },
@@ -32,7 +37,9 @@ const appRoutes: Routes = [
     AppOnboardingComponent,
     WorkflowComponent,
     AppCreationComponent,
-    SaveFormComponent
+    SaveFormComponent,
+    UserRegistrationComponent,
+    CaptchaComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -41,9 +48,14 @@ const appRoutes: Routes = [
     FormsModule,
     AppRoutingModule,
     DndModule,
-    
+    HttpClientModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    RecaptchaModule, RecaptchaFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+ 
+}
